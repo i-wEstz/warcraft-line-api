@@ -1,25 +1,15 @@
 <?php
+try
+{
+    $connection = new Mongo('mongodb://iwestz:iwestz@ds145389.mlab.com:45389/wow-api-ah');
+    $database   = $connection->selectDB('wow-api-ah');
+    $collection = $database->selectCollection('AH');
+}
+catch(MongoConnectionException $e)
+{
+    die("Failed to connect to database ".$e->getMessage());
+}
 
-require('../vendor/autoload.php');
+$cursor = $collection->find();
 
-$app = new Silex\Application();
-$app['debug'] = true;
-
-// Register the monolog logging service
-$app->register(new Silex\Provider\MonologServiceProvider(), array(
-  'monolog.logfile' => 'php://stderr',
-));
-
-// Register view rendering
-$app->register(new Silex\Provider\TwigServiceProvider(), array(
-    'twig.path' => __DIR__.'/views',
-));
-
-// Our web handlers
-
-$app->get('/', function() use($app) {
-  $app['monolog']->addDebug('logging output.');
-  return $app['twig']->render('index.twig');
-});
-
-$app->run();
+?>
