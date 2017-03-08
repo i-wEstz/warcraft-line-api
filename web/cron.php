@@ -31,13 +31,15 @@ sort($item_list);
 foreach($item_list as $val){
 
 $item_name = file_get_contents('https://us.api.battle.net/wow/item/'.$val.'?locale=en_US&apikey=4vz7v2gtujvqtkprvy85f6mj9fwaanb8');
+print "<br>";
+print_r('Data: '.$item_name.'');
 $json_item = json_decode($item_name, true); // decode the JSON into an associative array
 $name[$json_item['name']] = $val;
 
 }
 
-print "<br>";
-print_r('Data: '.$name.'');
+// print "<br>";
+// print_r('Data: '.$name.'');
 
 print "<br>";
 print_r('Successfully insert unique with '.count($item_list).' Records');
