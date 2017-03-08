@@ -34,11 +34,11 @@ $item_name = file_get_contents('https://us.api.battle.net/wow/item/'.$val.'?loca
 // print "<br>";
 // print_r('Data: '.$item_name.'');
 $json_item = json_decode($item_name, true); // decode the JSON into an associative array
-$name[$json_item['name']] = $val;
-
+// $name[$json_item['name']] = $val;
+$collection_item->insert(array("name" => $json_item['name'], "item" => $val ));
 }
 
-$collection_item->insert($name);
+// $collection_item->insert($name);
 
 // $collection_item->remove(array(),array('w' => true));
 // $collection_item->insert($name);
