@@ -17,7 +17,7 @@ $timeQuery = array('lastModified' => $lastModi['lastModified']);
 
 $cursor_2 = $date_db->find($timeQuery);
 
-if(isset($cursor_2)){
+if(!isset($cursor_2)){
 $date_db->insert($lastModi);
 $collection->remove(array(),array('safe' => true));
 foreach ($json_data['auctions'] as $key=>$value) {
@@ -32,7 +32,7 @@ foreach ($json_data['auctions'] as $key=>$value) {
 
 }
 $item_list = array_unique($list);
-// sort($item_list);
+sort($item_list);
 $itemL->remove(array(),array('safe' => true));
 // $itemL->batchInsert($item_list);
 foreach($item_list as $key=>$val){
