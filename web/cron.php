@@ -2,6 +2,7 @@
 require('connection.php');
 ini_set('max_execution_time', 300);
 $collection = $database->selectCollection('AH');
+$collection_item = $database->selectCollection('item_list');
 
 $list = array();
 $str = file_get_contents('https://us.api.battle.net/wow/auction/data/dreadmaul?locale=en_US&apikey=4vz7v2gtujvqtkprvy85f6mj9fwaanb8');
@@ -25,7 +26,8 @@ print_r('Successfully Collect Data with '.count($ah_data).' Records');
 $item_list = array_unique($list);
 sort($item_list);
 
-print_f($item_list);
+$collection_item->insert($item_list);
+print_r('Successfully insert unique with '.count($item_list).' Records');
 
 
 
