@@ -19,5 +19,5 @@ foreach ($json_data['auctions'] as $key=>$value) {
 
 
 }
-
+print_r('Successfully Collect Data');
 ?>
