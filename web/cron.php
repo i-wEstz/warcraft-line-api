@@ -10,7 +10,7 @@ $data_url = $json['files'][0]['url'];
 
 $json_data = json_decode(file_get_contents($data_url),true);
 
-$collection->remove(array(),array('safe' => true));
+$collection->remove(array(),array('w' => true));
 foreach ($json_data['auctions'] as $key=>$value) {
 
 
