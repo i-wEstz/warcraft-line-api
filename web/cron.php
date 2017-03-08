@@ -27,19 +27,25 @@ print_r('Successfully Collect Data with '.count($ah_data).' Records');
 $item_list = array_unique($list);
 sort($item_list);
 // $collection_item->insert($item_list);
-
+$collection_item->remove(array(),array('w' => true));
 foreach($item_list as $val){
 
 $item_name = file_get_contents('https://us.api.battle.net/wow/item/'.$val.'?locale=en_US&apikey=4vz7v2gtujvqtkprvy85f6mj9fwaanb8');
-print "<br>";
-print_r('Data: '.$item_name.'');
+// print "<br>";
+// print_r('Data: '.$item_name.'');
 $json_item = json_decode($item_name, true); // decode the JSON into an associative array
 $name[$json_item['name']] = $val;
 
 }
 
-// print "<br>";
-// print_r('Data: '.$name.'');
+$collection_item->insert($name);
+
+// $collection_item->remove(array(),array('w' => true));
+// $collection_item->insert($name);
+
+print "<br>";
+print_r('Data: '.$name.'');
+print "<br>";
 
 print "<br>";
 print_r('Successfully insert unique with '.count($item_list).' Records');
