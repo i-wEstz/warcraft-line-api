@@ -31,6 +31,7 @@ foreach ($json_data['auctions'] as $key=>$value) {
 
 
 }
+print_r('insert ah suc');
 $item_list = array_unique($list);
 sort($item_list);
 $itemL->remove(array(),array('safe' => true));
@@ -38,14 +39,15 @@ $itemL->remove(array(),array('safe' => true));
 foreach($item_list as $val){
     $itemL->insert($val);
 }
+print_r('insert list suc');
 // }
 // else{
 
 // }
 
-// print "<pre>";
-// print_r($json_data['auctions']);
-// print "</pre>";
+print "<pre>";
+print_r($item_list);
+print "</pre>";
 
 function unique_multidim_array($array, $key) { 
     $temp_array = array(); 
