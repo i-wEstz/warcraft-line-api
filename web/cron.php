@@ -32,8 +32,9 @@ foreach ($json_data['auctions'] as $key=>$value) {
 
 }
 $item_list = array_unique($list);
+sort($item_list);
 $itemL->remove(array(),array('safe' => true));
-$itemL->insert($item_list);
+$itemL->batchInsert($item_list);
 }
 else{
 
