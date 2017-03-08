@@ -10,15 +10,15 @@ $data_url = $json['files'][0]['url'];
 $lastModi['lastModified'] = $json['files'][0]['lastModified'];
 
 $json_data = json_decode(file_get_contents($data_url),true);
-$lastModi = json_encode($lastModi['lastModified']);
+// $lastModi = json_encode($lastModi['lastModified']);
 $auction_data = $json_data['auctions'];
 
-$timeQuery = array('lastModified' => $lastModi['lastModified']);
+$timeQuery = json_encode(array('lastModified' => $lastModi));
 
-$cursor_2 = $date_db->find($timeQuery);
+$cursor_2 = $date_db->find(array('lastModified' => $lastModi));
 
 // if(!isset($cursor_2)){
-$date_db->insert($lastModi);
+$date_db->insert($timeQuery);
 $collection->remove(array(),array('safe' => true));
 foreach ($json_data['auctions'] as $key=>$value) {
     // print_r($value['item']);
@@ -35,7 +35,7 @@ $item_list = array_unique($list);
 sort($item_list);
 $itemL->remove(array(),array('safe' => true));
 // $itemL->batchInsert($item_list);
-foreach($item_list as $key=>$val){
+foreach($item_list as $val){
     $itemL->insert($val);
 }
 // }
