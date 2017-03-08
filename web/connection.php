@@ -10,6 +10,6 @@ catch(MongoConnectionException $e)
     die("Failed to connect to database ".$e->getMessage());
 }
 
-$cursor = $collection->find();
+// $cursor = $collection->find();
 
 ?>
