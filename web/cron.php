@@ -26,8 +26,13 @@ print_r('Successfully Collect Data with '.count($ah_data).' Records');
 $item_list = array_unique($list);
 sort($item_list);
 
-$collection_item->insert($item_list);
+foreach ($item_list as $val) {
+$collection_item->insert($val);
+}
+
+print "<br>";
 print_r('Successfully insert unique with '.count($item_list).' Records');
+print "<br>";
 
 
 
