@@ -44,10 +44,6 @@ $collection_item->insert(array("name" => $json_item['name'], "item" => $val ));
 // $collection_item->insert($name);
 
 print "<br>";
-print_r('Data: '.$name.'');
-print "<br>";
-
-print "<br>";
 print_r('Successfully insert unique with '.count($item_list).' Records');
 print "<br>";
 
