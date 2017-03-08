@@ -16,7 +16,7 @@ $ah_data = $json_data['auctions'];
 $collection->remove(array(),array('w' => true));
 foreach ($ah_data as $key=>$value) {
 
-
+    $value['viable'] = round($value['buyout']/ $value['quantity'],2);
     $collection->insert($value);
     array_push($list,$value['item']);
 
