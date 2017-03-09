@@ -60,7 +60,7 @@ foreach ($client->parseEvents() as $event) {
 function Message($message_in){
 
     $str = trim(substr($message_in,2,strlen($message_in)));
-    $cursor = $collection_item->findOne(array('name' => $str));
-    return 'kuy id is '.$cursor['item'];
+    // $cursor = $collection_item->findOne(array('name' => $str));
+    return 'kuy id is '.$str;
 
 }
