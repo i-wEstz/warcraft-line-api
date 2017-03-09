@@ -63,6 +63,16 @@ function Message($message_in,$collection,$collection_item){
     // $collection_item = $database->selectCollection('item_list');
 
     $str = trim(substr($message_in,2,strlen($message_in)));
+     if(strtoupper($str) === 'WOWTOKEN' || strtoupper($str) === 'WOW TOKEN'){
+
+        $strn = file_get_contents('https://wowtoken.info/snapshot.json');
+        $json = json_decode($strn, true); // decode the JSON into an associative array
+        $json_na = $json['NA']['formatted'];
+        $text_result = "< ".$str." >"."\n--------------\n"."ราคาขาย: ".$json_na['buy']."\nต่ำสุด(24hrs): ".$json_na['24min']."\nสูงสุด(24hrs): ".$json_na['24max']."\nอัพเดทล่าสุด: ".$json_na['updated']." (+12 in Bangkok)";
+
+                    }else{
+
+                    
     $cursor = $collection_item->findOne(array('name' => strtoupper($str)));
     if(!empty($cursor)){
 
@@ -103,7 +113,7 @@ function Message($message_in,$collection,$collection_item){
        $text_result = $str.' นี่มันอะไรไม่รู้จักเฟ้ย ไปพิมพ์มาใหม่ !';
     }
 
-     
+     }
     
     return $text_result;
 
