@@ -63,9 +63,20 @@ function Message($message_in,$collection,$collection_item){
     // $collection_item = $database->selectCollection('item_list');
 
     $str = trim(substr($message_in,2,strlen($message_in)));
-    $cursor = $collection_item->findOne(array('name' => $str));
-    $ah = $collection->find(array('item' => $cursor['item']))->sort(array('buyout' => 1))->limit(1);
+    $cursor = $collection_item->findOne(array('name' => strtoupper($str)));
+    if(!empty($cursor)){
 
-    return 'kuy id is '.$cursor['item'];
+        $ah = $collection->find(array('item' => $cursor['item']))->sort(array('buyout' => 1))->limit(1);
+    foreach($ah as $data){
+        $text = "<b>".$str."</b><br> Buyout: ".$data['buyout'];
+    } 
+    }
+        else{
+       $text = 'Item Not Found';
+    }
+
+     
+    
+    return $text;
 
 }
