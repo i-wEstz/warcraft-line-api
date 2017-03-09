@@ -30,7 +30,7 @@ sort($item_list);
 $collection_item->remove(array(),array('w' => true));
 foreach($item_list as $val){
 
-$exist = $collection_item->find(array('item' => intval($val)))->limit(1);
+$exist = $collection_item->findOne(array('item' => intval($val)));
 if(empty($exist)){
 
 $item_name = file_get_contents('https://us.api.battle.net/wow/item/'.$val.'?locale=en_US&apikey=4vz7v2gtujvqtkprvy85f6mj9fwaanb8');
