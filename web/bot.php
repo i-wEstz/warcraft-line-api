@@ -69,10 +69,10 @@ function Message($message_in,$collection,$collection_item){
         $ah = $collection->find(array('item' => $cursor['item']))->sort(array('buyout' => 1))->limit(1);
     foreach($ah as $data){
         $length = strlen($data['buyout']);
-        $bronze = substr($data['buyout'],-2);
-        $silver = substr($data['buyout'],($length-2),-4);
-        $gold = substr($data['buyout'],($length-4),($length*-1));
-        $text = $str."\n ราคาถูกที่สุด Buyout: ".$gold.' G '.$silver.' S '.$bronze.' B \n จำนวน: '.$data['quantity'];
+        $bronze = substr($str,-2);
+        $silver = substr($str,-4,2);
+        $gold = substr($str,0,($length-4));
+        $text = $str."\nราคาถูกที่สุด Buyout: ".$gold.' G '.$silver.' S '.$bronze.' B'.'\n'.'จำนวน: '.$data['quantity'];
     } 
     }
         else{
