@@ -118,7 +118,7 @@ function Message($message_in,$collection,$collection_item){
     if($res['result'] == '100'){
     $text_result = $res['response'];
     } else{
-        $test_result = "จ้า";
+        $text_result = "จ้า";
     }
     // print_r($json['response']);
     }
