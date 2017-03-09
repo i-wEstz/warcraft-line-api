@@ -31,10 +31,7 @@ sort($item_list);
 foreach($item_list as $val){
 
 $exist = $collection_item->find(array('item' => intval($val)))->limit(1);
-print "<br>";
-print_r('Empty'.$val.' Records');
-print "<br>";
-if(empty($exist)){
+if(!empty($exist)){
 
 $item_name = file_get_contents('https://us.api.battle.net/wow/item/'.$val.'?locale=en_US&apikey=4vz7v2gtujvqtkprvy85f6mj9fwaanb8');
 // print "<br>";
