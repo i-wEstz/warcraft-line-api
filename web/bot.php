@@ -68,11 +68,11 @@ function Message($message_in,$collection,$collection_item){
 
         $ah = $collection->find(array('item' => $cursor['item']))->sort(array('buyout' => 1))->limit(1);
     foreach($ah as $data){
-        $text = "<b>".$str."</b><br> Buyout: ".$data['buyout'];
+        $text = urlencode("<b>".$str."</b><br> Buyout: ".$data['buyout']);
     } 
     }
         else{
-       $text = 'Item Not Found';
+       $text = 'Item Not Found '.chr('0x100083');
     }
 
      
