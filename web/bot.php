@@ -133,7 +133,7 @@ function Message($message_in,$collection,$collection_item){
      }
      }
      else{
-         $text_result = "เรียกแล้วก็ไม่บอกจะเอาอะไร อยากมีเรื่องหรา";
+         $text_result = "มีไรว่ามา";
     // $simisimi = file_get_contents('http://sandbox.api.simsimi.com/request.p?key=key&lc=th&text='.urlencode("สวัสดี"));
     // $res = json_decode($simisimi, true); // decode the JSON into an associative array
     // $text_result = $res['response'];
