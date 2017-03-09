@@ -68,11 +68,11 @@ function Message($message_in,$collection,$collection_item){
 
         $ah = $collection->find(array('item' => $cursor['item']))->sort(array('buyout' => 1))->limit(1);
     foreach($ah as $data){
-        $text = htmlentities("<b>".$str."</b><br> Buyout: ".$data['buyout']);
+        $text = mb_convert_encode("<b>".$str."</b><br> Buyout: ".$data['buyout'],'HTML-ENTITIES','UTF-8');
     } 
     }
         else{
-       $text = htmlentities('Item Not Found 0x100083');
+       $text = mb_convert_encode('Item Not Found 0x100083','HTML-ENTITIES','UTF-8');
     }
 
      
