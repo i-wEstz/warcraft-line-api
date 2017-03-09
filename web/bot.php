@@ -90,12 +90,17 @@ function Message($message_in,$collection,$collection_item){
         $bronze = substr($data['buyout'],-2);
         $silver = substr($data['buyout'],-4,2);
         $gold = substr($data['buyout'],0,($length-4));
-        $text_3 = "3.) คุ้มค่าที่สุด(ต่อชิ้น)"."\nBuyout: ".$gold.'-'.$silver.'-'.$bronze."\n".'จำนวน: '.$data['quantity']."\nตั้งโดย: ".$data['owner']."\n========\n";
+        // Viable
+        $len = strlen($data['viable']);
+        $br = substr($data['viable'],-2);
+        $si = substr($data['viable'],-4,2);
+        $go = substr($data['viable'],0,($len-4));
+        $text_3 = "3.) คุ้มค่าที่สุด(ต่อชิ้น)"."\nBuyout: ".$gold.'-'.$silver.'-'.$bronze."\n".'จำนวน: '.$data['quantity']."\nตั้งโดย: ".$data['owner']."\nราคาต่อชิ้น: ".$go."-".$si."-".$br."\n========\n";
     } 
     $text_result = $text_1.$text_2.$text_3; 
     }
         else{
-       $text_result = 'Item Not Found'." 0x100083";
+       $text_result = $str.' นี่ไอเท็มอะไรไม่รู้จักไปพิมพ์มาใหม่ !';
     }
 
      
