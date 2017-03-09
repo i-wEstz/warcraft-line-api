@@ -72,15 +72,34 @@ function Message($message_in,$collection,$collection_item){
         $bronze = substr($data['buyout'],-2);
         $silver = substr($data['buyout'],-4,2);
         $gold = substr($data['buyout'],0,($length-4));
-        $text = $str.">\n[ราคาถูกที่สุด Buyout: ".$gold.'/'.$silver.'/'.$bronze.'/'.'-'.'จำนวน: '.$data['quantity'].']\n';
+        $text_1 = $str." >\nราคาถูกที่สุด Buyout: ".$gold.'.'.$silver.'.'.$bronze.'.'."\n".'จำนวน: '.$data['quantity']."\nตั้งโดย: ".$data['owner'];
     } 
+        $ah = $collection->find(array('item' => $cursor['item']))->sort(array('quantity' => -1,'buyout'=> 1))->limit(1);
+
+        foreach($ah as $data){
+        $length = strlen($data['buyout']);
+        $bronze = substr($data['buyout'],-2);
+        $silver = substr($data['buyout'],-4,2);
+        $gold = substr($data['buyout'],0,($length-4));
+        $text_2 = "\nถูกที่สุดและจำนวนมากสุด Buyout: ".$gold.'.'.$silver.'.'.$bronze.'.'."\n".'จำนวน: '.$data['quantity']."\nตั้งโดย: ".$data['owner'];
+    } 
+    $ah = $collection->find(array('item' => $cursor['item']))->sort(array('viable' => 1))->limit(1);
+
+        foreach($ah as $data){
+        $length = strlen($data['buyout']);
+        $bronze = substr($data['buyout'],-2);
+        $silver = substr($data['buyout'],-4,2);
+        $gold = substr($data['buyout'],0,($length-4));
+        $text_3 = "\nคุ้มค่าที่สุด Buyout: ".$gold.'.'.$silver.'.'.$bronze.'.'."\n".'จำนวน: '.$data['quantity']."\nตั้งโดย: ".$data['owner'];
+    } 
+    $text_result = $text_1.$text_2.$text_3; 
     }
         else{
-       $text = 'Item Not Found 0x100083';
+       $text_result = 'Item Not Found 0x100083';
     }
 
      
     
-    return $text;
+    return $text_result;
 
 }
