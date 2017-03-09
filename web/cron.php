@@ -30,9 +30,9 @@ sort($item_list);
 // $collection_item->remove(array(),array('w' => true));
 foreach($item_list as $val){
 
-$exist = $collection_item->find(array('item' => $val))->limit(1);
+$exist = $collection_item->find(array('item' => intval($val)))->limit(1);
 print "<br>";
-print_r('Empty'.empty($exist).' Records');
+print_r('Empty'.$val.' Records');
 print "<br>";
 if(empty($exist)){
 
