@@ -111,13 +111,21 @@ function Message($message_in,$collection,$collection_item){
     $text_result = $text_1.$text_2.$text_3; 
     }
         else{
-       $text_result = $str.' นี่มันอะไรไม่รู้จักเฟ้ย ไปพิมพ์มาใหม่ !';
+            
+    //    $text_result = $str.' นี่มันอะไรไม่รู้จักเฟ้ย ไปพิมพ์มาใหม่ !';
+    $simisimi = file_get_contents('http://sandbox.api.simsimi.com/request.p?key=91da4caa-01fe-4674-a6ec-b445ea5f992a&lc=th&text='.$message_in);
+    $res = json_decode($simisimi, true); // decode the JSON into an associative array
+    $text_result = $res;
+    // print_r($json['response']);
     }
 
      }
      }
      else{
-         $text_result = "เรียกแล้วก็ไม่บอกจะเอาอะไร อยากมีเรื่องหรา";
+        //  $text_result = "เรียกแล้วก็ไม่บอกจะเอาอะไร อยากมีเรื่องหรา";
+        $simisimi = file_get_contents('http://sandbox.api.simsimi.com/request.p?key=91da4caa-01fe-4674-a6ec-b445ea5f992a&lc=th&text=""');
+    $res = json_decode($simisimi, true); // decode the JSON into an associative array
+    $text_result = $res;
      }
     return $text_result;
 
