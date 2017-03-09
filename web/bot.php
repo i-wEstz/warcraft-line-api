@@ -100,7 +100,7 @@ function Message($message_in,$collection,$collection_item){
     $text_result = $text_1.$text_2.$text_3; 
     }
         else{
-       $text_result = $str.' นี่ไอเท็มอะไรไม่รู้จักไปพิมพ์มาใหม่ !';
+       $text_result = $str.' นี่มันอะไรไม่รู้จักเฟ้ย ไปพิมพ์มาใหม่ !';
     }
 
      
