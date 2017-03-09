@@ -27,7 +27,7 @@ print_r('Successfully Collect Data with '.count($ah_data).' Records');
 $item_list = array_unique($list);
 sort($item_list);
 // $collection_item->insert($item_list);
-// $collection_item->remove(array(),array('w' => true));
+$collection_item->remove(array(),array('w' => true));
 foreach($item_list as $val){
 
 $exist = $collection_item->findOne(array('item' => $val));
