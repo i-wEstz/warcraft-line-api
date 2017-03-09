@@ -118,7 +118,7 @@ function Message($message_in,$collection,$collection_item){
     if($res['result'] == '100'){
     $text_result = $res['response'];
     } else{
-        $random_message = array("จ้า","คือไยหยอ","พูดอะไรไม่เห็นจะเข้าใจเลย");
+        $random_message = array("จ้า","คือไยหยอ","พูดอะไรไม่เห็นจะเข้าใจเลย","จะให้โอกาสพูดอีกที");
         $rand_keys = array_rand($random_message);
         $text_result = $random_message[$rand_keys];
     }
