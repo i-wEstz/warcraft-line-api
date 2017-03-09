@@ -22,8 +22,8 @@ require('connection.php');
 $collection = $database->selectCollection('AH');
 $collection_item = $database->selectCollection('item_list');
 
-$channelAccessToken = 'INlnJAtPlk6fbtEdrKwJs2Qvb9g4sRN7CWhm9GNWVbjYalLUXPf4rrqu6yVb+Chs1kePBrggCJ5NQgRGRSx/cnSg6E7ZLnU0Rj/Uf8C2cCWqFSaJDQbnfjffjW2R2iohgepVVIbgnRYm113ZEGTJOQdB04t89/1O/w1cDnyilFU=';
-$channelSecret = 'b600e84645566513de2c79423dcfa139';
+$channelAccessToken = getenv('LINE_ACCESS_TOKEN');
+$channelSecret = getenv('LINE_CHANNEL_SECRET');
 
 $client = new LINEBotTiny($channelAccessToken, $channelSecret);
 foreach ($client->parseEvents() as $event) {
@@ -58,6 +58,10 @@ foreach ($client->parseEvents() as $event) {
 };
 
 function Message($message_in,$collection,$collection_item){
+
+    $sim_api = getenv('SIMSISMI');
+    // $line_acc_token = getenv('LINE_ACCESS_TOKEN');
+    // $line_ch_secret = getenv('LINE_CHANNEL_SECRET');
 
     // $collection = $database->selectCollection('AH');
     // $collection_item = $database->selectCollection('item_list');
@@ -113,7 +117,7 @@ function Message($message_in,$collection,$collection_item){
         else{
             
     //    $text_result = $str.' นี่มันอะไรไม่รู้จักเฟ้ย ไปพิมพ์มาใหม่ !';
-    $simisimi = file_get_contents('http://api.simsimi.com/request.p?key=4b01ba0b-27bb-4ec3-a7fb-e178012a0257&lc=th&ft=1.0&text='.urlencode($str));
+    $simisimi = file_get_contents('http://api.simsimi.com/request.p?key='.$sim_api.'&lc=th&ft=1.0&text='.urlencode($str));
     $res = json_decode($simisimi, true); // decode the JSON into an associative array
     if($res['result'] == '100'){
     $text_result = $res['response'];
@@ -129,7 +133,7 @@ function Message($message_in,$collection,$collection_item){
      }
      else{
          $text_result = "เรียกแล้วก็ไม่บอกจะเอาอะไร อยากมีเรื่องหรา";
-    // $simisimi = file_get_contents('http://sandbox.api.simsimi.com/request.p?key=91da4caa-01fe-4674-a6ec-b445ea5f992a&lc=th&text='.urlencode("สวัสดี"));
+    // $simisimi = file_get_contents('http://sandbox.api.simsimi.com/request.p?key=key&lc=th&text='.urlencode("สวัสดี"));
     // $res = json_decode($simisimi, true); // decode the JSON into an associative array
     // $text_result = $res['response'];
      }

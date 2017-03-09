@@ -4,15 +4,16 @@ ini_set('max_execution_time', 1000);
 $collection = $database->selectCollection('AH');
 $collection_item = $database->selectCollection('item_list');
 
+$api_key = getenv('WOW');
 $list = array();
 $name = array();
-$str = file_get_contents('https://us.api.battle.net/wow/auction/data/dreadmaul?locale=en_US&apikey=4vz7v2gtujvqtkprvy85f6mj9fwaanb8');
+$str = file_get_contents('https://us.api.battle.net/wow/auction/data/dreadmaul?locale=en_US&apikey='.$api_key);
 $json = json_decode($str, true); // decode the JSON into an associative array
 $data_url = $json['files'][0]['url'];
 
 $json_data = json_decode(file_get_contents($data_url),true);
 $ah_data = $json_data['auctions'];
-
+ 
 $collection->remove(array(),array('w' => true));
 foreach ($ah_data as $key=>$value) {
 
@@ -33,7 +34,7 @@ foreach($item_list as $val){
 $exist = $collection_item->findOne(array('item' => $val));
 if(empty($exist)){
 
-$item_name = file_get_contents('https://us.api.battle.net/wow/item/'.$val.'?locale=en_US&apikey=4vz7v2gtujvqtkprvy85f6mj9fwaanb8');
+$item_name = file_get_contents('https://us.api.battle.net/wow/item/'.$val.'?locale=en_US&apikey='.$api_key);
 // print "<br>";
 // print_r('Data: '.$item_name.'');
 $json_item = json_decode($item_name, true); // decode the JSON into an associative array
