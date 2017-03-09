@@ -63,7 +63,9 @@ function Message($message_in,$collection,$collection_item){
     // $collection_item = $database->selectCollection('item_list');
 
     $str = trim(substr($message_in,2,strlen($message_in)));
-    $cursor = $collection_item->findOne(array('name' => 'Bent Staff'));
+    $cursor = $collection_item->findOne(array('name' => $str));
+    $ah = $collection->find(array('item' => $cursor['item']))->sort(array('buyout' => 1))->limit(1);
+
     return 'kuy id is '.$cursor['item'];
 
 }
