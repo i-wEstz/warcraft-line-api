@@ -63,6 +63,7 @@ function Message($message_in,$collection,$collection_item){
     // $collection_item = $database->selectCollection('item_list');
 
     $str = trim(substr($message_in,2,strlen($message_in)));
+    if($str != ''){
      if(strtoupper($str) === 'WOWTOKEN' || strtoupper($str) === 'WOW TOKEN'){
 
         $strn = file_get_contents('https://wowtoken.info/snapshot.json');
@@ -114,7 +115,10 @@ function Message($message_in,$collection,$collection_item){
     }
 
      }
-    
+     }
+     else{
+         $text_result = "เรียกแล้วก็ไม่บอกจะเอาอะไร เก๋าเอ๋อ !";
+     }
     return $text_result;
 
 }
