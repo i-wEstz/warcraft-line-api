@@ -32,7 +32,7 @@ foreach($item_list as $val){
 
 $exist = $collection_item->find(array('item' => $val))->limit(1);
 print "<br>";
-print_r('Empty'.$exist.' Records');
+print_r('Empty'.empty($exist).' Records');
 print "<br>";
 if(empty($exist)){
 
