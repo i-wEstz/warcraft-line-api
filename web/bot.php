@@ -1,7 +1,7 @@
 <?php
 require('connection.php');
 $collection_item = $database->selectCollection('item_list');
-$exist = $collection_item->findOne(array('item' => '720'));
+$exist = $collection_item->findOne(array('item' => 59897878));
 if(!empty($exist)){
     echo 'Data Already Exist';
 }
