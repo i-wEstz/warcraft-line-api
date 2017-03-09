@@ -117,7 +117,7 @@ function Message($message_in,$collection,$collection_item){
      }
      }
      else{
-         $text_result = "เรียกแล้วก็ไม่บอกจะเอาอะไร เก๋าเอ๋อ !";
+         $text_result = "เรียกแล้วก็ไม่บอกจะเอาอะไร มีปัญหาหรา !";
      }
     return $text_result;
 
