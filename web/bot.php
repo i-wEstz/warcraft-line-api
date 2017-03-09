@@ -72,7 +72,7 @@ function Message($message_in,$collection,$collection_item){
         $bronze = substr($data['buyout'],-2);
         $silver = substr($data['buyout'],-4,2);
         $gold = substr($data['buyout'],0,($length-4));
-        $text = $str."\nราคาถูกที่สุด Buyout: ".$gold.' G '.$silver.' S '.$bronze.' B'.'\n'.'จำนวน: '.$data['quantity'];
+        $text = $str.">\n[ราคาถูกที่สุด Buyout: ".$gold.'/'.$silver.'/'.$bronze.'/'.'-'.'จำนวน: '.$data['quantity'].']\n';
     } 
     }
         else{
