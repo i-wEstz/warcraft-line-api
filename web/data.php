@@ -5,7 +5,7 @@ $collection = $database->selectCollection('AH');
 $cursor = $collection_item->findOne(array('name' => 'Stormray'));
 $ah = $collection->find(array('item' => $cursor['item']))->sort(array('buyout' => 1))->limit(1);
 
-print_r($ah);
+print_r(iterator_to_array($ah));
 
 
 ?>
