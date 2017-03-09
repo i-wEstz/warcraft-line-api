@@ -113,7 +113,7 @@ function Message($message_in,$collection,$collection_item){
         else{
             
     //    $text_result = $str.' นี่มันอะไรไม่รู้จักเฟ้ย ไปพิมพ์มาใหม่ !';
-    $simisimi = file_get_contents('http://sandbox.api.simsimi.com/request.p?key=91da4caa-01fe-4674-a6ec-b445ea5f992a&lc=th&text='.$message_in);
+    $simisimi = file_get_contents('http://sandbox.api.simsimi.com/request.p?key=91da4caa-01fe-4674-a6ec-b445ea5f992a&lc=th&text='.urlencode($message_in));
     $res = json_decode($simisimi, true); // decode the JSON into an associative array
     $text_result = $res;
     // print_r($json['response']);
