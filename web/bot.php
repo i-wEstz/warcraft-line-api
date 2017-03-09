@@ -19,6 +19,9 @@
 require_once('LineBotTiny.php');
 require('connection.php');
 
+$collection = $database->selectCollection('AH');
+$collection_item = $database->selectCollection('item_list');
+
 $channelAccessToken = 'INlnJAtPlk6fbtEdrKwJs2Qvb9g4sRN7CWhm9GNWVbjYalLUXPf4rrqu6yVb+Chs1kePBrggCJ5NQgRGRSx/cnSg6E7ZLnU0Rj/Uf8C2cCWqFSaJDQbnfjffjW2R2iohgepVVIbgnRYm113ZEGTJOQdB04t89/1O/w1cDnyilFU=';
 $channelSecret = 'b600e84645566513de2c79423dcfa139';
 
@@ -30,7 +33,7 @@ foreach ($client->parseEvents() as $event) {
             switch ($message['type']) {
                 case 'text':
                 if(substr($message['text'],0,2) === 'AH'){
-                    $output = Message($message['text']);
+                    $output = Message($message['text'],$collection,$collection_item);
                     $client->replyMessage(array(
                         'replyToken' => $event['replyToken'],
                         'messages' => array(
@@ -54,11 +57,11 @@ foreach ($client->parseEvents() as $event) {
     }
 };
 
-function Message($message_in){
+function Message($message_in,$collection,$collection_item){
 
-    $collection = $database->selectCollection('AH');
-    $collection_item = $database->selectCollection('item_list');
-    
+    // $collection = $database->selectCollection('AH');
+    // $collection_item = $database->selectCollection('item_list');
+
     $str = trim(substr($message_in,2,strlen($message_in)));
     $cursor = $collection_item->findOne(array('name' => 'Bent Staff'));
     return 'kuy id is '.$cursor['item'];
