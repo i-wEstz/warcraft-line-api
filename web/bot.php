@@ -55,7 +55,8 @@ foreach ($client->parseEvents() as $event) {
 };
 
 function Message($message_in){
-    
-    return 'kuy'.$message_in;
+
+    $str = substr($message_in,1,strlen($message_in));
+    return 'kuy'.$str;
 
 }
