@@ -113,12 +113,14 @@ function Message($message_in,$collection,$collection_item){
         else{
             
     //    $text_result = $str.' นี่มันอะไรไม่รู้จักเฟ้ย ไปพิมพ์มาใหม่ !';
-    $simisimi = file_get_contents('http://sandbox.api.simsimi.com/request.p?key=91da4caa-01fe-4674-a6ec-b445ea5f992a&lc=th&text='.urlencode($str));
+    $simisimi = file_get_contents('http://api.simsimi.com/request.p?key=4b01ba0b-27bb-4ec3-a7fb-e178012a0257&lc=th&ft=1.0&text='.urlencode($str));
     $res = json_decode($simisimi, true); // decode the JSON into an associative array
     if($res['result'] == '100'){
     $text_result = $res['response'];
     } else{
-        $text_result = "จ้า";
+        $random_message = array("จ้า","คือไยหยอ");
+        $rand_keys = array_rand($random_message, 1);
+        $text_result = $random_message[$rand_keys[0]];
     }
     // print_r($json['response']);
     }
@@ -126,10 +128,10 @@ function Message($message_in,$collection,$collection_item){
      }
      }
      else{
-        //  $text_result = "เรียกแล้วก็ไม่บอกจะเอาอะไร อยากมีเรื่องหรา";
-    $simisimi = file_get_contents('http://sandbox.api.simsimi.com/request.p?key=91da4caa-01fe-4674-a6ec-b445ea5f992a&lc=th&text='.urlencode("สวัสดี"));
-    $res = json_decode($simisimi, true); // decode the JSON into an associative array
-    $text_result = $res['response'];
+         $text_result = "เรียกแล้วก็ไม่บอกจะเอาอะไร อยากมีเรื่องหรา";
+    // $simisimi = file_get_contents('http://sandbox.api.simsimi.com/request.p?key=91da4caa-01fe-4674-a6ec-b445ea5f992a&lc=th&text='.urlencode("สวัสดี"));
+    // $res = json_decode($simisimi, true); // decode the JSON into an associative array
+    // $text_result = $res['response'];
      }
     return $text_result;
 
