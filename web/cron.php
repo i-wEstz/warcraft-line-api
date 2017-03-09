@@ -27,11 +27,11 @@ print_r('Successfully Collect Data with '.count($ah_data).' Records');
 $item_list = array_unique($list);
 sort($item_list);
 // $collection_item->insert($item_list);
-// $collection_item->remove(array(),array('w' => true));
+$collection_item->remove(array(),array('w' => true));
 foreach($item_list as $val){
 
 $exist = $collection_item->find(array('item' => intval($val)))->limit(1);
-if(!empty($exist)){
+if(empty($exist)){
 
 $item_name = file_get_contents('https://us.api.battle.net/wow/item/'.$val.'?locale=en_US&apikey=4vz7v2gtujvqtkprvy85f6mj9fwaanb8');
 // print "<br>";
