@@ -29,7 +29,8 @@ foreach ($client->parseEvents() as $event) {
             $message = $event['message'];
             switch ($message['type']) {
                 case 'text':
-                $output = Message($message['text']);
+                if(substr($message['text'],0,2) === 'AH'){
+                    $output = Message($message['text']);
                     $client->replyMessage(array(
                         'replyToken' => $event['replyToken'],
                         'messages' => array(
@@ -39,6 +40,8 @@ foreach ($client->parseEvents() as $event) {
                             )
                         )
                     ));
+
+                }
                     break;
                 default:
                     error_log("Unsupporeted message type: " . $message['type']);
