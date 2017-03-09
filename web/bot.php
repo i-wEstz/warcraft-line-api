@@ -115,9 +115,7 @@ function Message($message_in,$collection,$collection_item){
     //    $text_result = $str.' นี่มันอะไรไม่รู้จักเฟ้ย ไปพิมพ์มาใหม่ !';
     $simisimi = file_get_contents('http://sandbox.api.simsimi.com/request.p?key=91da4caa-01fe-4674-a6ec-b445ea5f992a&lc=th&text='.urlencode($str));
     $res = json_decode($simisimi, true); // decode the JSON into an associative array
-    if($res['result'] === 100){
-
-    
+    if($res['result'] == '100'){
     $text_result = $res['response'];
     } else{
         $test_result = "จ้า";
