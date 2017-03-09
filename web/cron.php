@@ -30,8 +30,8 @@ sort($item_list);
 $collection_item->remove(array(),array('w' => true));
 foreach($item_list as $val){
 
-$exist = $collection_item->find(array('item' => $val),array('limit' => 1));
-// if(empty($exist)){
+$exist = $collection_item->find(array('item' => $val))->limit(1);
+if(empty($exist)){
 
 $item_name = file_get_contents('https://us.api.battle.net/wow/item/'.$val.'?locale=en_US&apikey=4vz7v2gtujvqtkprvy85f6mj9fwaanb8');
 // print "<br>";
@@ -40,7 +40,7 @@ $json_item = json_decode($item_name, true); // decode the JSON into an associati
 // $name[$json_item['name']] = $val;
 $collection_item->insert(array("name" => $json_item['name'], "item" => $val ));
 
-// } 
+} 
 }
 
 // $collection_item->insert($name);
