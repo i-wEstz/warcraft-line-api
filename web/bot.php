@@ -234,7 +234,7 @@ $url = "https://ronreiter-meme-generator.p.mashape.com/meme?bottom=".$bottom_tex
 
 
 $options = array(
-  'http'=>array(
+  'https'=>array(
     'method'=>"GET",
     'header'=>"X-Mashape-Key: GMiLIjGQGQmshGxR898bAzjR1opxp1ZV41Tjsn4CTcQ552SOIl"
   )
@@ -248,7 +248,7 @@ $url_img = "https://api.imgur.com/3/image";
 $data = array('image' => base64_encode($file), 'type' => 'base64');
 
 $options_img = array(
-  'http'=>array(
+  'https'=>array(
     'method'=>"POST",
     'header'=>"Authorization: Client-ID 9df67189cdfab87\r\n"."Content-type: application/x-www-form-urlencoded\r\n",
     'content' => http_build_query($data)
