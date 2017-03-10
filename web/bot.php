@@ -77,8 +77,10 @@ function Message($message_in,$collection,$collection_item){
 
                     }else{
 
-                    
-    $cursor = $collection_item->findOne(array('name' => strtoupper($str)));
+    $search = strtoupper($str);                    
+    $where = array('name' => array('$regex' => new MongoRegex("/^$search/")));               
+    // $cursor = $collection_item->findOne(array('name' => strtoupper($str)));
+    $cursor = $collection_item->findOne($where);
     if(!empty($cursor)){
 
         $ah = $collection->find(array('item' => $cursor['item'],'buyout' => array('$gt' => 0)))->sort(array('buyout' => 1))->limit(1);
