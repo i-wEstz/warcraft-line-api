@@ -61,7 +61,7 @@ foreach ($client->parseEvents() as $event) {
     }
 };
 
-function Message($message_in,$collection,$collection_item,$userId){
+function Message($message_in,$collection,$collection_item,$userId,$teach){
 
     $sim_api = getenv('SIMSISMI');
     // $line_acc_token = getenv('LINE_ACCESS_TOKEN');
