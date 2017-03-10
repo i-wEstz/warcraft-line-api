@@ -29,14 +29,14 @@ $client = new LINEBotTiny($channelAccessToken, $channelSecret);
 foreach ($client->parseEvents() as $event) {
 
     $userId = $event['source']['userId'];
-    
+
     switch ($event['type']) {
         case 'message':
             $message = $event['message'];
             switch ($message['type']) {
                 case 'text':
                 if(substr($message['text'],0,2) === 'AH'){
-                    $output = Message($message['text'],$collection,$collection_item);
+                    $output = Message($message['text'],$collection,$collection_item,$userId);
                     $client->replyMessage(array(
                         'replyToken' => $event['replyToken'],
                         'messages' => array(
@@ -60,7 +60,7 @@ foreach ($client->parseEvents() as $event) {
     }
 };
 
-function Message($message_in,$collection,$collection_item){
+function Message($message_in,$collection,$collection_item,$userId){
 
     $sim_api = getenv('SIMSISMI');
     // $line_acc_token = getenv('LINE_ACCESS_TOKEN');
@@ -78,7 +78,12 @@ function Message($message_in,$collection,$collection_item){
         $json_na = $json['NA']['formatted'];
         $text_result = "< ".$str." >"."\n--------------\n"."ราคาขาย: ".$json_na['buy']."\nต่ำสุด(24hrs): ".$json_na['24min']."\nสูงสุด(24hrs): ".$json_na['24max']."\nอัพเดทล่าสุด: ".$json_na['updated']." (+12 in Bangkok)";
 
-                    }else{
+                    }
+                    elseif(strtoupper($str) === 'TEACH'){
+
+                            $text_result = $userId;
+                        }
+                        else{
 
     $search = strtoupper($str);                    
     $where = array('name' => array('$regex' => new MongoRegex("/^$search/")));               
