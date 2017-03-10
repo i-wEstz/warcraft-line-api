@@ -29,7 +29,13 @@ $channelSecret = getenv('LINE_CHANNEL_SECRET');
 $client = new LINEBotTiny($channelAccessToken, $channelSecret);
 foreach ($client->parseEvents() as $event) {
 
-    $userId = $event['source']['groupId'];
+    if($event['source']['type'] == 'user'){
+        $specId = $event['source']['userId'];
+    }
+    elseif($event['source']['type'] == 'group'){
+        $specId = $event['source']['groupId'];
+    }
+    
 
     switch ($event['type']) {
         case 'message':
@@ -37,7 +43,7 @@ foreach ($client->parseEvents() as $event) {
             switch ($message['type']) {
                 case 'text':
                 if(substr($message['text'],0,2) === 'AH'){
-                    $output = Message($message['text'],$collection,$collection_item,$userId,$teach);
+                    $output = Message($message['text'],$collection,$collection_item,$specId,$teach);
                     $client->replyMessage(array(
                         'replyToken' => $event['replyToken'],
                         'messages' => array(
@@ -61,7 +67,7 @@ foreach ($client->parseEvents() as $event) {
     }
 };
 
-function Message($message_in,$collection,$collection_item,$userId,$teach){
+function Message($message_in,$collection,$collection_item,$specId,$teach){
 
     $sim_api = getenv('SIMSISMI');
     // $line_acc_token = getenv('LINE_ACCESS_TOKEN');
@@ -82,7 +88,7 @@ function Message($message_in,$collection,$collection_item,$userId,$teach){
                     }
                     elseif(strtoupper($str) === 'TEACH'){
 
-                            $text_result = $userId;
+                            $text_result = $specId;
                         }
                         else{
 
