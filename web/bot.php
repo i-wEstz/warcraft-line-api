@@ -92,7 +92,7 @@ function Message($message_in,$collection,$collection_item,$specId,$teach){
                     elseif(strtoupper(substr($str,0,5)) === 'TEACH'){
 
                             $teach_string = trim(substr($str,5,strlen($str)));
-                            if($teach_string !== ""){
+                            if($teach_string != ''){
                              $new_answer = array('$set' => array("answer" => $teach_string));
                             $teach->update(array("user" => $specId), $new_answer);
                             $text_result = "ขอบคุณที่สอนจ้า".$specId;
