@@ -159,7 +159,7 @@ function Message($message_in,$collection,$collection_item,$specId,$teach){
         $rand_keys = array_rand($random_message);
         $text_result = $random_message[$rand_keys];
 
-        $teach->insert(array("user" => $userId, "question" => $str , "answer" => $text_result));
+        $teach->insert(array("user" => $specId, "question" => $str , "answer" => $text_result));
 
     }
     // print_r($json['response']);
