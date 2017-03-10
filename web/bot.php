@@ -34,6 +34,8 @@ foreach ($client->parseEvents() as $event) {
     }
     elseif($event['source']['type'] == 'group'){
         $specId = $event['source']['groupId'];
+    }else{
+        $specId = $event['source']['userId'];
     }
     
 
