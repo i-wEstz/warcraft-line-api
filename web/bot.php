@@ -89,7 +89,7 @@ function Message($message_in,$collection,$collection_item){
         $bronze = substr($data['buyout'],-2);
         $silver = substr($data['buyout'],-4,2);
         $gold = substr($data['buyout'],0,($length-4));
-        $text_1 = "< ".$cursor['item']." >"."\n--------------\n"."1.) ราคาถูกที่สุด\nBuyout: ".$gold.'g'.$silver.'s'.$bronze."b\n".'จำนวน: '.$data['quantity']."\nตั้งโดย: ".$data['owner']."\n========\n";
+        $text_1 = "< ".$cursor['name']." >"."\n--------------\n"."1.) ราคาถูกที่สุด\nBuyout: ".$gold.'g'.$silver.'s'.$bronze."b\n".'จำนวน: '.$data['quantity']."\nตั้งโดย: ".$data['owner']."\n========\n";
     } 
         $ah = $collection->find(array('item' => $cursor['item'],'buyout' => array('$gt' => 0)))->sort(array('quantity' => -1,'buyout'=> 1))->limit(1);
 
@@ -98,7 +98,12 @@ function Message($message_in,$collection,$collection_item){
         $bronze = substr($data['buyout'],-2);
         $silver = substr($data['buyout'],-4,2);
         $gold = substr($data['buyout'],0,($length-4));
-        $text_2 = "2.) ถูกที่สุดและจำนวนมากสุด"."\nBuyout: ".$gold.'g'.$silver.'s'.$bronze."b\n".'จำนวน: '.$data['quantity']."\nตั้งโดย: ".$data['owner']."\n========\n";
+        // Viable
+        $len = strlen($data['viable']);
+        $br = substr($data['viable'],-2);
+        $si = substr($data['viable'],-4,2);
+        $go = substr($data['viable'],0,($len-4));
+        $text_2 = "2.) ถูกที่สุดและจำนวนมากสุด"."\nBuyout: ".$gold.'g'.$silver.'s'.$bronze."b\n".'จำนวน: '.$data['quantity']."\nตั้งโดย: ".$data['owner']."\nราคาต่อชิ้น: ".$go."g".$si."s".$br."b\n========\n";
     } 
     $ah = $collection->find(array('item' => $cursor['item'],'buyout' => array('$gt' => 0)))->sort(array('viable' => 1))->limit(1);
 
