@@ -21,6 +21,7 @@ require('connection.php');
 
 $collection = $database->selectCollection('AH');
 $collection_item = $database->selectCollection('item_list');
+$teach = $database->selectCollection('teach');
 
 $channelAccessToken = getenv('LINE_ACCESS_TOKEN');
 $channelSecret = getenv('LINE_CHANNEL_SECRET');
@@ -144,6 +145,9 @@ function Message($message_in,$collection,$collection_item,$userId){
         ,"หมูป่าปากีสถาน","อิไม่มีดอก","หน้าหนังฮี๋ สังกะสีบาดแตด","นังมิติลี้ลับ!","ห่ากินหัว","ปอบถั่งมึง","สี่แม่ง","บ่ค่อยฮู้เรื่อง","เรื่องดีๆเธอคงไม่ถนัด แต่ถ้าเรื่องสัตว์สัตว์เธอถนัดดี๊ดี","เธอๆนี่โลกมนุษย์ ผุดลงไปใต้ดินได้แล้วค่ะ","สมองใหญ่เท่านมคงจะดี","หัดใช้ฟังก์ชั่นหลักของตูบ้างสิวะ");
         $rand_keys = array_rand($random_message);
         $text_result = $random_message[$rand_keys];
+
+        $teach->insert(array("user" => $userId, "question" => $str , "answer" => $text_result));
+
     }
     // print_r($json['response']);
     }
