@@ -86,9 +86,16 @@ function Message($message_in,$collection,$collection_item,$specId,$teach){
         $text_result = "< ".$str." >"."\n--------------\n"."ราคาขาย: ".$json_na['buy']."\nต่ำสุด(24hrs): ".$json_na['24min']."\nสูงสุด(24hrs): ".$json_na['24max']."\nอัพเดทล่าสุด: ".$json_na['updated']." (+12 in Bangkok)";
 
                     }
-                    elseif(strtoupper($str) === 'TEACH'){
+                    // Teach !!
+                    elseif(strtoupper(substr($str,0,5)) === 'TEACH'){
 
-                            $text_result = $specId;
+                            $teach_string = trim(substr($str,5,strlen($str)));
+                            if($teach_string !== ""){
+                             $new_answer = array('$set' => array("answer" => $teach_string));
+                            $teach->update(array("user" => $specId), $new_answer);
+                            $text_result = "ขอบคุณที่สอนจ้า";
+                            }
+                            
                         }
                         else{
 
