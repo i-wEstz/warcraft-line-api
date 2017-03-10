@@ -37,7 +37,7 @@ foreach ($client->parseEvents() as $event) {
             switch ($message['type']) {
                 case 'text':
                 if(substr($message['text'],0,2) === 'AH'){
-                    $output = Message($message['text'],$collection,$collection_item,$userId);
+                    $output = Message($message['text'],$collection,$collection_item,$userId,$teach);
                     $client->replyMessage(array(
                         'replyToken' => $event['replyToken'],
                         'messages' => array(
