@@ -34,38 +34,15 @@ foreach ($client->parseEvents() as $event) {
                 case 'text':
                 if(substr($message['text'],0,2) === 'AH'){
                     $output = Message($message['text'],$collection,$collection_item);
-                    // check response type
-                    if($output['type'] == 'text'){
-
-                          $client->replyMessage(array(
+                    $client->replyMessage(array(
                         'replyToken' => $event['replyToken'],
                         'messages' => array(
                             array(
                                 'type' => 'text',
-                                'text' => $output['result']
+                                'text' => $output
                             )
                         )
                     ));
-
-
-                    }elseif($output['type'] == 'image'){
-
-                          $client->replyMessage(array(
-                        'replyToken' => $event['replyToken'],
-                        'messages' => array(
-                            array(
-                                'type' => 'image',
-                                'originalContentUrl' => $output['result'],
-                                'previewImageUrl' => $output['result']
-                            )
-                        )
-                    ));
-
-
-                    }
-
-
-                  
 
                 }
                     break;
@@ -139,16 +116,10 @@ function Message($message_in,$collection,$collection_item){
     }
         else{
 
-     $random_response = array("simsimi","meme");   
+     $random_response = array("simsimi","sticker","meme");   
      $response_key = array_rand($random_response);    
-     $response_result = $random_response[$response_key];
-
-    //  random response
-
-// SIMSISMI
-    if($response_result == 'simsimi'){
-
-             //    $text_result = $str.' นี่มันอะไรไม่รู้จักเฟ้ย ไปพิมพ์มาใหม่ !';
+            
+    //    $text_result = $str.' นี่มันอะไรไม่รู้จักเฟ้ย ไปพิมพ์มาใหม่ !';
     $simisimi = file_get_contents('http://api.simsimi.com/request.p?key='.$sim_api.'&lc=th&ft=1.0&text='.urlencode($str));
     $res = json_decode($simisimi, true); // decode the JSON into an associative array
     if($res['result'] == '100'){
@@ -158,48 +129,19 @@ function Message($message_in,$collection,$collection_item){
         ,"หมูป่าปากีสถาน","อิไม่มีดอก","หน้าหนังฮี๋ สังกะสีบาดแตด","นังมิติลี้ลับ!","ห่ากินหัว","ปอบถั่งมึง","สี่แม่ง","บ่ค่อยฮู้เรื่อง","เรื่องดีๆเธอคงไม่ถนัด แต่ถ้าเรื่องสัตว์สัตว์เธอถนัดดี๊ดี","เธอๆนี่โลกมนุษย์ ผุดลงไปใต้ดินได้แล้วค่ะ","สมองใหญ่เท่านมคงจะดี","หัดใช้ฟังก์ชั่นหลักของตูบ้างสิวะ");
         $rand_keys = array_rand($random_message);
         $text_result = $random_message[$rand_keys];
-       
     }
-
-     $type = 'text';
-
-// MEME
- }    elseif($response_result == 'meme'){
-
-         
-        $meme_url = getMeme($message_in);
-        $type = 'image';
-
- }
-
-
-            
-    // //    $text_result = $str.' นี่มันอะไรไม่รู้จักเฟ้ย ไปพิมพ์มาใหม่ !';
-    // $simisimi = file_get_contents('http://api.simsimi.com/request.p?key='.$sim_api.'&lc=th&ft=1.0&text='.urlencode($str));
-    // $res = json_decode($simisimi, true); // decode the JSON into an associative array
-    // if($res['result'] == '100'){
-    // $text_result = $res['response'];
-    // } else{
-    //     $random_message = array("จ้า","คือไยหยอ","พูดอะไรไม่เห็นจะเข้าใจเลย","จะให้โอกาสพูดอีกที","อีตาปลาบนตีนตะกวด","อีกิ้งกือตัดต่อพันธุกรรม","อีลบเข็บของไส้เดือน","ไม่มีปัญญาทำให้ผู้ชายมารัก","เธอๆ ทำยังไงให้อ้วนอ่ะ","ถ้า นีล อาร์มสตอรง เค้าเจอเธอก่อนเค้าคงไม่ต้องไปดวงจันทร์"
-    //     ,"หมูป่าปากีสถาน","อิไม่มีดอก","หน้าหนังฮี๋ สังกะสีบาดแตด","นังมิติลี้ลับ!","ห่ากินหัว","ปอบถั่งมึง","สี่แม่ง","บ่ค่อยฮู้เรื่อง","เรื่องดีๆเธอคงไม่ถนัด แต่ถ้าเรื่องสัตว์สัตว์เธอถนัดดี๊ดี","เธอๆนี่โลกมนุษย์ ผุดลงไปใต้ดินได้แล้วค่ะ","สมองใหญ่เท่านมคงจะดี","หัดใช้ฟังก์ชั่นหลักของตูบ้างสิวะ");
-    //     $rand_keys = array_rand($random_message);
-    //     $text_result = $random_message[$rand_keys];
-    // }
-
+    // print_r($json['response']);
     }
 
      }
      }
      else{
          $text_result = "มีไรว่ามา";
-         $type = "text";
     // $simisimi = file_get_contents('http://sandbox.api.simsimi.com/request.p?key=key&lc=th&text='.urlencode("สวัสดี"));
     // $res = json_decode($simisimi, true); // decode the JSON into an associative array
     // $text_result = $res['response'];
      }
-
-
-    return array("result" => $text_result,"type" => $type);
+    return $text_result;
 
 }
 
