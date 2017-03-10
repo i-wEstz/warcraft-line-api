@@ -89,16 +89,17 @@ function Message($message_in,$collection,$collection_item,$specId,$teach){
 
                     }
                     // Teach !!
-                    elseif(strtoupper(substr($str,0,5)) === 'TEACH'){
+                    // elseif(strtoupper(substr($str,0,5)) === 'TEACH'){
 
-                            $teach_string = trim(substr($str,5,strlen($str)));
-                            if($teach_string != ''){
-                             $new_answer = array('$set' => array("answer" => $teach_string));
-                            $teach->update(array("user" => $specId), $new_answer);
-                            $text_result = "ขอบคุณที่สอนจ้า".$specId;
-                            }
+                    //         $teach_string = trim(substr($str,5,strlen($str)));
+                    //         if($teach_string != ''){
+                    //          $new_answer = array('$set' => array("answer" => $teach_string));
+                    //         $teach->update(array("user" => $specId), $new_answer);
+                    //         $text_result = "ขอบคุณที่สอนจ้า".$specId;
+                    //         }
                             
-                        }
+                    //     }
+
                         else{
 
     $search = strtoupper($str);                    
