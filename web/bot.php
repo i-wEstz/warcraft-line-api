@@ -27,6 +27,9 @@ $channelSecret = getenv('LINE_CHANNEL_SECRET');
 
 $client = new LINEBotTiny($channelAccessToken, $channelSecret);
 foreach ($client->parseEvents() as $event) {
+
+    $userId = $event['source']['userId'];
+    
     switch ($event['type']) {
         case 'message':
             $message = $event['message'];
