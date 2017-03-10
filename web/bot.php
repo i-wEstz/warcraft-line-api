@@ -89,7 +89,7 @@ function Message($message_in,$collection,$collection_item){
         $bronze = substr($data['buyout'],-2);
         $silver = substr($data['buyout'],-4,2);
         $gold = substr($data['buyout'],0,($length-4));
-        $text_1 = "< ".$str." >"."\n--------------\n"."1.) ราคาถูกที่สุด\nBuyout: ".$gold.'g'.$silver.'s'.$bronze."b\n".'จำนวน: '.$data['quantity']."\nตั้งโดย: ".$data['owner']."\n========\n";
+        $text_1 = "< ".$cursor['item']." >"."\n--------------\n"."1.) ราคาถูกที่สุด\nBuyout: ".$gold.'g'.$silver.'s'.$bronze."b\n".'จำนวน: '.$data['quantity']."\nตั้งโดย: ".$data['owner']."\n========\n";
     } 
         $ah = $collection->find(array('item' => $cursor['item'],'buyout' => array('$gt' => 0)))->sort(array('quantity' => -1,'buyout'=> 1))->limit(1);
 
