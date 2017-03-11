@@ -223,14 +223,14 @@ function teachBot($message_in,$specId,$teach){
 $str = trim(substr($message_in,5,strlen($message_in)));
 
 // Add Case
-$split =  explode('==',$str);
+$split =  explode('==',$str,2);
 
 $question = trim($split[0]); //Question
 $answer = trim($split[1]); //Answer
 
 // Delete Case
 
-$split_del = explode('--',$str);
+$split_del = explode('--',$str,2);
 $question_del = trim($split_del[0]); //Question For Del
 $answer_del = trim($split_del[1]); //Answer For Del
 
@@ -249,7 +249,7 @@ $teach->update(array("_id" => $id),array('$addToSet' => array("answer" => $answe
 else{ // Empty Insert New one
 $teach->insert(array("question" => $question , "answer" => array($answer)));    
 }
-$text_result = "โอเคฉันจะลองตอบแบบนี้ดู";    
+$text_result = "โอเคฉันจะจำไว้";    
 }
 elseif(isset($split_del[0]) && isset($split_del[1])){
 
