@@ -199,8 +199,9 @@ function Message($message_in,$collection,$collection_item,$specId,$teach){
         $cursor_question = $teach->findOne($where_question);  
         if(!empty($cursor_question)){
         
-        $answer_list = $cursor_question['answer'][0];
-        $text_result = $answer_list; 
+        $answer_list = $cursor_question['answer'];
+        $rand_ans = array_rand($answer_list);
+        $text_result = $answer_list[$rand_ans]; 
         } 
         else{
 
