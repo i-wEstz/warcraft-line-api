@@ -91,7 +91,7 @@ function Message($message_in,$collection,$collection_item,$specId,$teach){
        
          try  
 {  
-  $strn = file_get_contents('https://wowtoken.info/snapshot.json');
+  $strn = @file_get_contents('https://wowtoken.info/snapshot.json');
   if($strn==false)
   {
      throw new Exception('WoW Token ล่มอยู่จ้ากรุณารอสักครู่');  
