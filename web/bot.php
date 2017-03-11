@@ -72,7 +72,7 @@ foreach ($client->parseEvents() as $event) {
                     ));
 
                 }
-                elseif(substr($message['text'],0,5) === 'BOT'){
+                elseif(substr($message['text'],0,3) === 'BOT'){
 
                      $output = chatBot($message['text'],$teach);
                     $client->replyMessage(array(
