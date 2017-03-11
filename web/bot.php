@@ -227,9 +227,9 @@ $question = $split[0]; //Question
 $answer = $split[1]; //Answer
 
 if(isset($split[0]) && isset($split[1])){
-// $where = array("question" => $question,array('$addToSet' => array("answer" => $answer)));
+$where = array("question" => $question);
 // $teach->insert(array("user" => $specId, "question" => $question , "answer" => $answer));    
-$where = array('question' => array('$regex' => new MongoRegex("/^$question/")));              
+// $where = array('question' => array('$regex' => new MongoRegex("/^$question/")));              
 // $teach->update(array("question" => $question),array('$addToSet' => array("answer" => $answer)));
 $cursor = $teach->findOne($where);
 if(!empty($cursor)){
