@@ -82,16 +82,30 @@ function Message($message_in,$collection,$collection_item,$specId,$teach){
     if($str != ''){
      if(strtoupper($str) === 'WOWTOKEN' || strtoupper($str) === 'WOW TOKEN'){
 
-        try{
-            $strn = file_get_contents('https://wowtoken.info/snapshot.json');
-             $json = json_decode($strn, true); // decode the JSON into an associative array
+        
+            // $strn = file_get_contents('https://wowtoken.info/snapshot.json');
+        //      $json = json_decode($strn, true); // decode the JSON into an associative array
+        // $json_na = $json['NA']['formatted'];
+        // $text_result = "< ".$str." >"."\n--------------\n"."ราคาขาย: ".$json_na['buy']."\nต่ำสุด(24hrs): ".$json_na['24min']."\nสูงสุด(24hrs): ".$json_na['24max']."\nอัพเดทล่าสุด: ".$json_na['updated']." (+12 in Bangkok)";
+       
+       
+         try  
+{  
+  $strn = file_get_contents('https://wowtoken.info/snapshot.json');
+  if($strn==false)
+  {
+     throw new Exception('WoW Token ล่มอยู่จ้ากรุณารอสักครู่');  
+  }
+  else{
+           $json = json_decode($strn, true); // decode the JSON into an associative array
         $json_na = $json['NA']['formatted'];
         $text_result = "< ".$str." >"."\n--------------\n"."ราคาขาย: ".$json_na['buy']."\nต่ำสุด(24hrs): ".$json_na['24min']."\nสูงสุด(24hrs): ".$json_na['24max']."\nอัพเดทล่าสุด: ".$json_na['updated']." (+12 in Bangkok)";
-        }
-        catch(ErrorException $e){
-            $text_result = $e->getMessage();
-        }
-       
+  }
+}  
+catch (Exception $e)  
+{  
+  $text_result = $e->getMessage();  
+}  
 
                     }
                     // Teach !!
