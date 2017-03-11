@@ -271,6 +271,7 @@ $cursor = $teach->findOne($where);
 if(!empty($cursor)){
 $id = $cursor['_id'];
 $teach->update(array("_id" => $id),array('$pull' => array("answer" => $answer_del)));
+$text_result = "ฉันลบคำตอบกระหลั่วๆๆแบบนี้ให้แล้วจ้า";  
 // $id = new MongoId($id);
 }
 }
