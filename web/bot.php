@@ -234,11 +234,11 @@ $where = array('question' => array('$regex' => new MongoRegex("/^$question/")));
 $cursor = $teach->findOne($where);
 if(!empty($cursor)){
 $id = $cursor['_id'];
-$teach->update(array("_id" => $id),array('$addToSet' => array("answer" => $answer)));
+$teach->update(array("_id" => $question),array('$addToSet' => array("answer" => $answer)));
 // $id = new MongoId($id);
 }
 else{ // Empty Insert New one
-$teach->insert(array("question" => $question , array("answer" => $answer)));    
+$teach->insert(array("question" => $question , "answer" => $answer));    
 }
 $text_result = "โอเคฉันจะลองตอบแบบนี้ดู";    
 }
