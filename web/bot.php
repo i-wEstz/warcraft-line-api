@@ -234,16 +234,24 @@ function teachBot($message_in,$specId,$teach){
 
 $str = trim(substr($message_in,5,strlen($message_in)));
 
+// Add Case
 $split =  explode('==',$str);
 
 $question = $split[0]; //Question
 $answer = $split[1]; //Answer
 
+// Delete Case
+
+$split_del = explode('--',$str);
+$question_del = $split_del[0]; //Question For Del
+$answer_del = $split_del[1]; //Answer For Del
+
+
 if(isset($split[0]) && isset($split[1])){
 // $where = array("question" => $question);
 // $teach->insert(array("user" => $specId, "question" => $question , "answer" => $answer));    
 $where = array('question' => array('$regex' => new MongoRegex("/^$question/")));              
-// $teach->update(array("question" => $question),array('$addToSet' => array("answer" => $answer)));
+// // $teach->update(array("question" => $question),array('$addToSet' => array("answer" => $answer)));
 $cursor = $teach->findOne($where);
 if(!empty($cursor)){
 $id = $cursor['_id'];
@@ -255,8 +263,21 @@ $teach->insert(array("question" => $question , "answer" => array($answer)));
 }
 $text_result = "โอเคฉันจะลองตอบแบบนี้ดู";    
 }
+elseif(isset($split_del[0]) && isset($split_del[1])){
+
+$where = array('question' => $question_del);              
+// // $teach->update(array("question" => $question),array('$addToSet' => array("answer" => $answer)));
+$cursor = $teach->findOne($where);
+if(!empty($cursor)){
+$id = $cursor['_id'];
+$teach->update(array("_id" => $id),array('$pull' => array("answer" => $answer_del)));
+// $id = new MongoId($id);
+}
+}
 else{
+
 $text_result = "สอนฉันแบบนี้นะ \nTEACH <คำถาม> == <คำตอบ> \nเช่น TEACH ใครหล่อที่สุด == ฉันน่ะสิฉันน่ะสิ ";
+
 }
 
 
