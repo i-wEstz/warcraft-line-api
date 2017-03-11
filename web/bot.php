@@ -229,7 +229,7 @@ $answer = $split[1]; //Answer
 if(isset($split[0]) && isset($split[1])){
 $where = array("question" => $question,array('$addToSet' => array("answer" => $answer)));
 // $teach->insert(array("user" => $specId, "question" => $question , "answer" => $answer));    
-$teach->save($where);
+$teach->update($where);
 $text_result = "โอเคฉันจะลองตอบแบบนี้ดู";    
 }
 else{
