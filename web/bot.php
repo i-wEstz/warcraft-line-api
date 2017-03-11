@@ -298,7 +298,7 @@ $sim_api = getenv('SIMSISMI');
             $text_result = $res['response'];
              } else{ // Custom Chat call
 
-        $where_question = array('question' => array('$regex' => new MongoRegex("/^$str/")));   
+        $where_question = array('question' => array('$regex' => new MongoRegex("/^$str/i")));   
         $cursor_question = $teach->findOne($where_question);  
         if(!empty($cursor_question)){
         
@@ -322,7 +322,7 @@ $sim_api = getenv('SIMSISMI');
         }
         else{ //custom Chat Call
 
-        $where_question = array('question' => array('$regex' => new MongoRegex("/^$str/")));   
+        $where_question = array('question' => array('$regex' => new MongoRegex("/^$str/i")));   
         $cursor_question = $teach->findOne($where_question);  
         if(!empty($cursor_question)){
         
