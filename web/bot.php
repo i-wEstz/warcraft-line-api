@@ -202,7 +202,7 @@ function Message($message_in,$collection,$collection_item,$specId,$teach){
         else{
  
             
-       $text_result = $str.' นี่มันอะไรไม่รู้จักเฟ้ย ไปพิมพ์มาใหม่ !';
+       $text_result = $str.' นี่มันอะไรไม่รู้จักเฟ้ย ไปพิมพ์มาใหม่ ! แต่ถ้าอยากคุยเล่นใช้ BOT แทน AH นะจ๊ะ';
     // print_r($json['response']);
     }
 
