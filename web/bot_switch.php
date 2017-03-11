@@ -74,17 +74,6 @@ foreach ($client->parseEvents() as $event) {
                 }
                 elseif(substr($message['text'],0,5) === 'BOT'){
 
-                     $output = chatBot($message['text'],$teach);
-                    $client->replyMessage(array(
-                        'replyToken' => $event['replyToken'],
-                        'messages' => array(
-                            array(
-                                'type' => 'text',
-                                'text' => $output
-                            )
-                        )
-                    ));
-
                 }
                     break;
                 default:
@@ -202,7 +191,33 @@ function Message($message_in,$collection,$collection_item,$specId,$teach){
         else{
  
             
-       $text_result = $str.' นี่มันอะไรไม่รู้จักเฟ้ย ไปพิมพ์มาใหม่ !';
+    //    $text_result = $str.' นี่มันอะไรไม่รู้จักเฟ้ย ไปพิมพ์มาใหม่ !';
+    $simisimi = file_get_contents('http://api.simsimi.com/request.p?key='.$sim_api.'&lc=th&ft=1.0&text='.urlencode($str));
+    $res = json_decode($simisimi, true); // decode the JSON into an associative array
+    if($res['result'] == '100'){
+    $text_result = $res['response'];
+    } else{
+
+        $where_question = array('question' => array('$regex' => new MongoRegex("/^$str/")));   
+        $cursor_question = $teach->findOne($where_question);  
+        if(!empty($cursor_question)){
+        
+        $answer_list = $cursor_question['answer'];
+        $rand_ans = array_rand($answer_list);
+        $text_result = $answer_list[$rand_ans]; 
+        } 
+        else{
+
+        $random_message = array("จ้า","คือไยหยอ","พูดอะไรไม่เห็นจะเข้าใจเลย","จะให้โอกาสพูดอีกที","อีตาปลาบนตีนตะกวด","อีกิ้งกือตัดต่อพันธุกรรม","อีลบเข็บของไส้เดือน","ไม่มีปัญญาทำให้ผู้ชายมารัก","เธอๆ ทำยังไงให้อ้วนอ่ะ","ถ้า นีล อาร์มสตอรง เค้าเจอเธอก่อนเค้าคงไม่ต้องไปดวงจันทร์"
+        ,"หมูป่าปากีสถาน","อิไม่มีดอก","หน้าหนังฮี๋ สังกะสีบาดแตด","นังมิติลี้ลับ!","ห่ากินหัว","ปอบถั่งมึง","สี่แม่ง","บ่ค่อยฮู้เรื่อง","เรื่องดีๆเธอคงไม่ถนัด แต่ถ้าเรื่องสัตว์สัตว์เธอถนัดดี๊ดี","เธอๆนี่โลกมนุษย์ ผุดลงไปใต้ดินได้แล้วค่ะ","สมองใหญ่เท่านมคงจะดี","หัดใช้ฟังก์ชั่นหลักของตูบ้างสิวะ");
+        $rand_keys = array_rand($random_message);
+        $text_result = $random_message[$rand_keys];
+
+        }
+
+        // $teach->insert(array("user" => $specId, "question" => $str , "answer" => $text_result));
+
+    }
     // print_r($json['response']);
     }
 
@@ -271,94 +286,4 @@ $text_result = "สอนแบบนี้นะ \nTEACH <คำถาม> == <
 
 
 return $text_result;
-}
-
-function chatBot($message_in,$teach){
-
-$sim_api = getenv('SIMSISMI');
-    
-     $response = array('bot','custom');
-     $rand_response = array_rand($response);
-     $response_result = $response[$rand_response];
-    // $line_acc_token = getenv('LINE_ACCESS_TOKEN');
-    // $line_ch_secret = getenv('LINE_CHANNEL_SECRET');
-
-    // $collection = $database->selectCollection('AH');
-    // $collection_item = $database->selectCollection('item_list');
-
-    $str = trim(substr($message_in,3,strlen($message_in)));
-    if($str != ''){
-        
-        if($response_result == 'bot'){
-
-
-            $simisimi = file_get_contents('http://api.simsimi.com/request.p?key='.$sim_api.'&lc=th&ft=1.0&text='.urlencode($str));
-            $res = json_decode($simisimi, true); // decode the JSON into an associative array
-             if($res['result'] == '100'){
-            $text_result = $res['response'];
-             } else{ // Custom Chat call
-
-        $where_question = array('question' => array('$regex' => new MongoRegex("/^$str/")));   
-        $cursor_question = $teach->findOne($where_question);  
-        if(!empty($cursor_question)){
-        
-        $answer_list = $cursor_question['answer'];
-        $rand_ans = array_rand($answer_list);
-        $text_result = $answer_list[$rand_ans]; 
-        } 
-        else{
-        
-         $random_message = array("จ้า","คือไยหยอ","พูดอะไรไม่เห็นจะเข้าใจเลย","จะให้โอกาสพูดอีกที","อีตาปลาบนตีนตะกวด","อีกิ้งกือตัดต่อพันธุกรรม","อีลบเข็บของไส้เดือน","ไม่มีปัญญาทำให้ผู้ชายมารัก","เธอๆ ทำยังไงให้อ้วนอ่ะ","ถ้า นีล อาร์มสตอรง เค้าเจอเธอก่อนเค้าคงไม่ต้องไปดวงจันทร์"
-        ,"หมูป่าปากีสถาน","อิไม่มีดอก","หน้าหนังฮี๋ สังกะสีบาดแตด","นังมิติลี้ลับ!","ห่ากินหัว","ปอบถั่งมึง","สี่แม่ง","บ่ค่อยฮู้เรื่อง","เรื่องดีๆเธอคงไม่ถนัด แต่ถ้าเรื่องสัตว์สัตว์เธอถนัดดี๊ดี","เธอๆนี่โลกมนุษย์ ผุดลงไปใต้ดินได้แล้วค่ะ","สมองใหญ่เท่านมคงจะดี","หัดใช้ฟังก์ชั่นหลักของตูบ้างสิวะ");
-        $rand_keys = array_rand($random_message);
-        $text_result = $random_message[$rand_keys];
-
-        }
-             
-             }
-
-            
-
-        }
-        else{ //custom Chat Call
-
-        $where_question = array('question' => array('$regex' => new MongoRegex("/^$str/")));   
-        $cursor_question = $teach->findOne($where_question);  
-        if(!empty($cursor_question)){
-        
-        $answer_list = $cursor_question['answer'];
-        $rand_ans = array_rand($answer_list);
-        $text_result = $answer_list[$rand_ans]; 
-        } 
-        else{
-             $simisimi = file_get_contents('http://api.simsimi.com/request.p?key='.$sim_api.'&lc=th&ft=1.0&text='.urlencode($str));
-            $res = json_decode($simisimi, true); // decode the JSON into an associative array
-             if($res['result'] == '100'){
-            $text_result = $res['response'];
-             } else{
-
-                  $random_message = array("จ้า","คือไยหยอ","พูดอะไรไม่เห็นจะเข้าใจเลย","จะให้โอกาสพูดอีกที","อีตาปลาบนตีนตะกวด","อีกิ้งกือตัดต่อพันธุกรรม","อีลบเข็บของไส้เดือน","ไม่มีปัญญาทำให้ผู้ชายมารัก","เธอๆ ทำยังไงให้อ้วนอ่ะ","ถ้า นีล อาร์มสตอรง เค้าเจอเธอก่อนเค้าคงไม่ต้องไปดวงจันทร์"
-        ,"หมูป่าปากีสถาน","อิไม่มีดอก","หน้าหนังฮี๋ สังกะสีบาดแตด","นังมิติลี้ลับ!","ห่ากินหัว","ปอบถั่งมึง","สี่แม่ง","บ่ค่อยฮู้เรื่อง","เรื่องดีๆเธอคงไม่ถนัด แต่ถ้าเรื่องสัตว์สัตว์เธอถนัดดี๊ดี","เธอๆนี่โลกมนุษย์ ผุดลงไปใต้ดินได้แล้วค่ะ","สมองใหญ่เท่านมคงจะดี","หัดใช้ฟังก์ชั่นหลักของตูบ้างสิวะ");
-        $rand_keys = array_rand($random_message);
-        $text_result = $random_message[$rand_keys];
-             
-             
-             }
-
-        }
-
-        }
-
-
-
-
-
-        } //Endof String != '' 
-
-    else{
-    $text_result = "มีไรว่ามา";
-    }
-
-    return $text_result;
-
 }
