@@ -11,12 +11,12 @@ $name = array();
 $str = file_get_contents('https://us.api.battle.net/wow/auction/data/dreadmaul?locale=en_US&apikey='.$api_key);
 $json = json_decode($str, true); // decode the JSON into an associative array
 $data_url = $json['files'][0]['url'];
-$lastModified = $json['files'][0]['lastModified'];
+// $lastModified = $json['files'][0]['lastModified'];
 // $currentTime = gmdate($format);
 // $interval = date_diff(date_create($lastModified), date_create($currentTime));
 // $min=$interval->format('%i');
 // $sec=$interval->format('%s');
-// $date_modifield->insert(array("last_update" => $lastModified));
+// $date_modifield->save(array("last_update" => $lastModified));
 
 
 $json_data = json_decode(file_get_contents($data_url),true);

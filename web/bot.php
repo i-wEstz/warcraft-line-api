@@ -57,6 +57,21 @@ foreach ($client->parseEvents() as $event) {
                     ));
 
                 }
+                elseif(substr($message['text'],0,5) === 'TEACH'){
+
+                    $output = teachBot($message['text'],$specId,$teach);
+
+                    $client->replyMessage(array(
+                        'replyToken' => $event['replyToken'],
+                        'messages' => array(
+                            array(
+                                'type' => 'text',
+                                'text' => $output
+                            )
+                        )
+                    ));
+
+                }
                     break;
                 default:
                     error_log("Unsupporeted message type: " . $message['type']);
@@ -200,4 +215,25 @@ function Message($message_in,$collection,$collection_item,$specId,$teach){
      }
     return $text_result;
 
+}
+
+function teachBot($message_in,$specId,$teach){
+
+$str = trim(substr($message_in,5,strlen($message_in)));
+
+$split =  explode('==',$str);
+
+$question = $split[0]; //Question
+$answer = $split[1]; //Answer
+
+if(isset($split[0]) || isset($split[1]) || $str == ""){
+$text_result = "สอนฉันแบบนี้นะ TEACH <คำถาม> == <คำตอบ> \nเช่น TEACH ใครหล่อที่สุด == ฉันน่ะสิฉันน่ะสิ ";
+}
+else{
+$teach->insert(array("user" => $specId, "question" => $question , "answer" => $answer));    
+$text_result = "โอเคฉันจะลองตอบแบบนี้ดู";
+}
+
+
+return $text_result;
 }
