@@ -194,10 +194,22 @@ function Message($message_in,$collection,$collection_item,$specId,$teach){
     if($res['result'] == '100'){
     $text_result = $res['response'];
     } else{
+
+        $where_question = array('question' => array('$regex' => new MongoRegex("/^$str/")));   
+        $cursor_question = $teach->findOne($where_question);  
+        if(!empty($cursor_question)){
+        
+        $answer_list = $cursor['answer'][0];
+        $text_result = $answer_list; 
+        } 
+        else{
+
         $random_message = array("จ้า","คือไยหยอ","พูดอะไรไม่เห็นจะเข้าใจเลย","จะให้โอกาสพูดอีกที","อีตาปลาบนตีนตะกวด","อีกิ้งกือตัดต่อพันธุกรรม","อีลบเข็บของไส้เดือน","ไม่มีปัญญาทำให้ผู้ชายมารัก","เธอๆ ทำยังไงให้อ้วนอ่ะ","ถ้า นีล อาร์มสตอรง เค้าเจอเธอก่อนเค้าคงไม่ต้องไปดวงจันทร์"
         ,"หมูป่าปากีสถาน","อิไม่มีดอก","หน้าหนังฮี๋ สังกะสีบาดแตด","นังมิติลี้ลับ!","ห่ากินหัว","ปอบถั่งมึง","สี่แม่ง","บ่ค่อยฮู้เรื่อง","เรื่องดีๆเธอคงไม่ถนัด แต่ถ้าเรื่องสัตว์สัตว์เธอถนัดดี๊ดี","เธอๆนี่โลกมนุษย์ ผุดลงไปใต้ดินได้แล้วค่ะ","สมองใหญ่เท่านมคงจะดี","หัดใช้ฟังก์ชั่นหลักของตูบ้างสิวะ");
         $rand_keys = array_rand($random_message);
         $text_result = $random_message[$rand_keys];
+
+        }
 
         // $teach->insert(array("user" => $specId, "question" => $str , "answer" => $text_result));
 
