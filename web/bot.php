@@ -238,7 +238,7 @@ $teach->update(array("_id" => $question),array('$addToSet' => array("answer" => 
 // $id = new MongoId($id);
 }
 else{ // Empty Insert New one
-$teach->insert(array("question" => $question , "answer" => $answer));    
+$teach->insert(array("question" => $question , "answer" => array($answer)));    
 }
 $text_result = "โอเคฉันจะลองตอบแบบนี้ดู";    
 }
