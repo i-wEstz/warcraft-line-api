@@ -199,7 +199,7 @@ function Message($message_in,$collection,$collection_item,$specId,$teach){
         $cursor_question = $teach->findOne($where_question);  
         if(!empty($cursor_question)){
         
-        $answer_list = $cursor['answer'][0];
+        $answer_list = $cursor_question['answer'][0];
         $text_result = $answer_list; 
         } 
         else{
