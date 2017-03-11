@@ -82,10 +82,16 @@ function Message($message_in,$collection,$collection_item,$specId,$teach){
     if($str != ''){
      if(strtoupper($str) === 'WOWTOKEN' || strtoupper($str) === 'WOW TOKEN'){
 
-        $strn = file_get_contents('https://wowtoken.info/snapshot.json');
-        $json = json_decode($strn, true); // decode the JSON into an associative array
+        try{
+            $strn = file_get_contents('https://wowtoken.info/snapshot.json');
+             $json = json_decode($strn, true); // decode the JSON into an associative array
         $json_na = $json['NA']['formatted'];
         $text_result = "< ".$str." >"."\n--------------\n"."ราคาขาย: ".$json_na['buy']."\nต่ำสุด(24hrs): ".$json_na['24min']."\nสูงสุด(24hrs): ".$json_na['24max']."\nอัพเดทล่าสุด: ".$json_na['updated']." (+12 in Bangkok)";
+        }
+        catch(ErrorException $e){
+            $text_result = $e->getMessage();
+        }
+       
 
                     }
                     // Teach !!
@@ -97,6 +103,8 @@ function Message($message_in,$collection,$collection_item,$specId,$teach){
                     //         $teach->update(array("user" => $specId), $new_answer);
                     //         $text_result = "ขอบคุณที่สอนจ้า".$specId;
                     //         }
+
+                    // $teach->insert(array("user" => $specId, "question" => $str , "answer" => $text_result));
                             
                     //     }
 
@@ -162,7 +170,7 @@ function Message($message_in,$collection,$collection_item,$specId,$teach){
         $rand_keys = array_rand($random_message);
         $text_result = $random_message[$rand_keys];
 
-        $teach->insert(array("user" => $specId, "question" => $str , "answer" => $text_result));
+        // $teach->insert(array("user" => $specId, "question" => $str , "answer" => $text_result));
 
     }
     // print_r($json['response']);
