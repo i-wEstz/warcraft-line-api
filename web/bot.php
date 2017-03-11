@@ -226,12 +226,12 @@ $split =  explode('==',$str);
 $question = $split[0]; //Question
 $answer = $split[1]; //Answer
 
-if(isset($split[0]) || isset($split[1]) || $str == ""){
-$text_result = "สอนฉันแบบนี้นะ TEACH <คำถาม> == <คำตอบ> \nเช่น TEACH ใครหล่อที่สุด == ฉันน่ะสิฉันน่ะสิ ";
+if(isset($split[0]) || isset($split[1])){
+$teach->insert(array("user" => $specId, "question" => $question , "answer" => $answer));    
+$text_result = "โอเคฉันจะลองตอบแบบนี้ดู";    
 }
 else{
-$teach->insert(array("user" => $specId, "question" => $question , "answer" => $answer));    
-$text_result = "โอเคฉันจะลองตอบแบบนี้ดู";
+$text_result = "สอนฉันแบบนี้นะ \nTEACH <คำถาม> == <คำตอบ> \nเช่น TEACH ใครหล่อที่สุด == ฉันน่ะสิฉันน่ะสิ ";
 }
 
 
