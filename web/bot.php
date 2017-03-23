@@ -73,7 +73,27 @@ foreach ($client->parseEvents() as $event) {
 
                 }
                 elseif(substr($message['text'],0,3) === 'BOT'){
+                        // for fun laoz
+                        $str = trim(substr($message['text'],3,strlen($message['text'])));
+                        if($str == 'เหลา'){
 
+                             $client->replyMessage(array(
+                        'replyToken' => $event['replyToken'],
+                        'messages' => array(
+                            array(
+                                'type' => 'image',
+                                'originalContentUrl' => 'http://i.imgur.com/wC7aAUs.jpg',
+                                'previewImageUrl' => 'http://i.imgur.com/wC7aAUs.jpg'
+                            )
+                        )
+                    ));
+
+                        }
+                        // end of for fun laoz
+                        else{
+
+                        
+                    
                      $output = chatBot($message['text'],$teach);
                     $client->replyMessage(array(
                         'replyToken' => $event['replyToken'],
@@ -84,6 +104,7 @@ foreach ($client->parseEvents() as $event) {
                             )
                         )
                     ));
+                    }
 
                 }
                     break;
