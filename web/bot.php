@@ -90,6 +90,22 @@ foreach ($client->parseEvents() as $event) {
 
                         }
                         // end of for fun laoz
+                        // start for fun boss
+                        elseif($str == 'บอส'){
+
+                             $client->replyMessage(array(
+                        'replyToken' => $event['replyToken'],
+                        'messages' => array(
+                            array(
+                                'type' => 'image',
+                                'originalContentUrl' => 'https://i.imgur.com/wsVvmQm.jpg',
+                                'previewImageUrl' => 'https://i.imgur.com/wsVvmQm.jpg'
+                            )
+                        )
+                    ));
+                            
+                        }
+                        // end of for fun boss
                         else{
 
                         
