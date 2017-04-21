@@ -114,8 +114,8 @@ foreach ($client->parseEvents() as $event) {
                         'messages' => array(
                             array(
                                 'type' => 'image',
-                                'originalContentUrl' => 'http://i.imgur.com/SGZLBHr.jpg',
-                                'previewImageUrl' => 'http://i.imgur.com/SGZLBHr.jpg'
+                                'originalContentUrl' => 'https://i.imgur.com/SGZLBHr.jpg',
+                                'previewImageUrl' => 'https://i.imgur.com/SGZLBHr.jpg'
                             )
                         )
                     ));
@@ -130,8 +130,8 @@ foreach ($client->parseEvents() as $event) {
                         'messages' => array(
                             array(
                                 'type' => 'image',
-                                'originalContentUrl' => 'http://i.imgur.com/TEYIAp5.jpg',
-                                'previewImageUrl' => 'http://i.imgur.com/TEYIAp5.jpg'
+                                'originalContentUrl' => 'https://i.imgur.com/TEYIAp5.jpg',
+                                'previewImageUrl' => 'https://i.imgur.com/TEYIAp5.jpg'
                             )
                         )
                     ));
