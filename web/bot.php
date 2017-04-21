@@ -106,6 +106,22 @@ foreach ($client->parseEvents() as $event) {
                             
                         }
                         // end of for fun boss
+                         // start for fun bank
+                        elseif($str == 'แบงค์'){
+
+                             $client->replyMessage(array(
+                        'replyToken' => $event['replyToken'],
+                        'messages' => array(
+                            array(
+                                'type' => 'image',
+                                'originalContentUrl' => 'http://i.imgur.com/SGZLBHr.jpg',
+                                'previewImageUrl' => 'http://i.imgur.com/SGZLBHr.jpg'
+                            )
+                        )
+                    ));
+                            
+                        }
+                        // end of for fun bank
                         else{
 
                         
