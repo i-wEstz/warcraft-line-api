@@ -122,6 +122,22 @@ foreach ($client->parseEvents() as $event) {
                             
                         }
                         // end of for fun bank
+                          // start for fun all
+                        elseif($str == 'ออล'){
+
+                             $client->replyMessage(array(
+                        'replyToken' => $event['replyToken'],
+                        'messages' => array(
+                            array(
+                                'type' => 'image',
+                                'originalContentUrl' => 'http://i.imgur.com/TEYIAp5.jpg',
+                                'previewImageUrl' => 'http://i.imgur.com/TEYIAp5.jpg'
+                            )
+                        )
+                    ));
+                            
+                        }
+                        // end of for fun bank
                         else{
 
                         
