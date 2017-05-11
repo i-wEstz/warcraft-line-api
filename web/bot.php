@@ -72,6 +72,20 @@ foreach ($client->parseEvents() as $event) {
                     ));
 
                 }
+                elseif(substr($message['text'],0,4) === 'LOVE'){
+
+                     $output = LoveScore($message['text']);
+                    $client->replyMessage(array(
+                        'replyToken' => $event['replyToken'],
+                        'messages' => array(
+                            array(
+                                'type' => 'text',
+                                'text' => $output
+                            )
+                        )
+                    ));
+                
+                }
                 elseif(substr($message['text'],0,3) === 'BOT'){
                         // for fun laoz
                         $str = trim(substr($message['text'],3,strlen($message['text'])));
@@ -138,22 +152,6 @@ foreach ($client->parseEvents() as $event) {
                             
                         }
                         // end of for fun all
-                         // start for fun love
-                        elseif(substr($message['text'],0,4) === 'LOVE'){
-
-                    $output = LoveScore($message['text']);
-                    $client->replyMessage(array(
-                        'replyToken' => $event['replyToken'],
-                        'messages' => array(
-                            array(
-                                'type' => 'text',
-                                'text' => $output
-                            )
-                        )
-                    ));
-                            
-                        }
-                        // end of for fun love
                         else{
 
                         
