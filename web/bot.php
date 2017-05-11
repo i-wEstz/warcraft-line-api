@@ -137,7 +137,23 @@ foreach ($client->parseEvents() as $event) {
                     ));
                             
                         }
-                        // end of for fun bank
+                        // end of for fun all
+                         // start for fun love
+                        elseif(substr($message['text'],0,4) === 'LOVE'){
+
+                    $output = LoveScore($message['text']);
+                    $client->replyMessage(array(
+                        'replyToken' => $event['replyToken'],
+                        'messages' => array(
+                            array(
+                                'type' => 'text',
+                                'text' => $output
+                            )
+                        )
+                    ));
+                            
+                        }
+                        // end of for fun love
                         else{
 
                         
@@ -429,5 +445,31 @@ $sim_api = getenv('SIMSISMI');
     }
 
     return $text_result;
+
+}
+
+function LoveScore($message_in){
+
+    $str = trim(substr($message_in,4,strlen($message_in)));
+    $names = explode("-", $str);
+
+
+    $opts = array(
+  'http'=>array(
+    'method'=>"GET",
+    'header'=>"X-Mashape-Key: 3AXm18xK3DmshYflu1c7Icp5tMfnp1LoMu3jsnmgcMGN9AbvN5" 
+  )
+);
+
+$context = stream_context_create($opts);
+
+// Open the file using the HTTP headers set above
+$file = file_get_contents('https://love-calculator.p.mashape.com/getPercentage?fname='.$names[0].'&sname='.$names[1], true, $context);
+$result = json_decode($file,true);
+
+$str_result = "Love Calculator <3 \n".$names[0].' ==<3 '.$names[1]."\n".'ความเข้ากันได้ : '.$result['percentage']." เปอร์เซน\nผลลัพธ์ : ".$result['result'];
+return $str_result;
+
+
 
 }
