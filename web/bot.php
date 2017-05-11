@@ -157,6 +157,25 @@ foreach ($client->parseEvents() as $event) {
                         
                     
                      $output = chatBot($message['text'],$teach);
+                     // start for fun meme
+                     if(substr($output,0,4) == 'MEME'){
+
+                         $url_meme = explode(" ", $output);
+
+                          $client->replyMessage(array(
+                        'replyToken' => $event['replyToken'],
+                        'messages' => array(
+                            array(
+                                'type' => 'image',
+                                'originalContentUrl' => $url_meme[1],
+                                'previewImageUrl' => $url_meme[1]
+                            )
+                        )
+                    ));
+
+                     }
+                    //  end of for fun meme
+                     else{
                     $client->replyMessage(array(
                         'replyToken' => $event['replyToken'],
                         'messages' => array(
@@ -166,6 +185,7 @@ foreach ($client->parseEvents() as $event) {
                             )
                         )
                     ));
+                     }
                     }
 
                 }
@@ -360,7 +380,7 @@ function chatBot($message_in,$teach){
 
 $sim_api = getenv('SIMSISMI');
     
-     $response = array('bot','custom');
+     $response = array('bot','custom','meme');
      $rand_response = array_rand($response);
      $response_result = $response[$rand_response];
     // $line_acc_token = getenv('LINE_ACCESS_TOKEN');
@@ -403,6 +423,16 @@ $sim_api = getenv('SIMSISMI');
             
 
         }
+        // start of meme
+        elseif($response_result == 'meme'){
+
+            $meme = file_get_content('http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=meme');
+            $result = json_decode($meme,true);
+            $text_result = "MEME ".str_replace( 'http://', 'https://', $result['data']['fixed_width_small_url'] );
+            
+
+        }
+        // end of meme
         else{ //custom Chat Call
 
         $where_question = array('question' => array('$regex' => new MongoRegex("/^$str/i")));   
