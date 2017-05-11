@@ -166,8 +166,8 @@ foreach ($client->parseEvents() as $event) {
                         'replyToken' => $event['replyToken'],
                         'messages' => array(
                             array(
-                                'type' => 'image',
-                                'originalContentUrl' => $url_meme[1],
+                                'type' => 'video',
+                                'originalContentUrl' => $url_meme[2],
                                 'previewImageUrl' => $url_meme[1]
                             )
                         )
@@ -428,7 +428,7 @@ $sim_api = getenv('SIMSISMI');
 
             $meme = file_get_contents('http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=meme');
             $result = json_decode($meme,true);
-            $text_result = "MEME ".str_replace( 'http://', 'https://', $result['data']['fixed_width_small_url'] );
+            $text_result = "MEME ".str_replace( 'http://', 'https://', $result['data']['fixed_width_small_url'])." ".str_replace( 'http://', 'https://', $result['data']['image_mp4_url'] );
             
 
         }
