@@ -426,7 +426,7 @@ $sim_api = getenv('SIMSISMI');
         // start of meme
         elseif($response_result == 'meme'){
 
-            $meme = file_get_content('http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=meme');
+            $meme = file_get_contents('http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=meme');
             $result = json_decode($meme,true);
             $text_result = "MEME ".str_replace( 'http://', 'https://', $result['data']['fixed_width_small_url'] );
             
