@@ -380,7 +380,8 @@ function chatBot($message_in,$teach){
 
 $sim_api = getenv('SIMSISMI');
     
-     $response = array('bot','custom','meme');
+    //  $response = array('bot','custom','meme');
+    $response = array('bot','custom'); // Del MEME
      $rand_response = array_rand($response);
      $response_result = $response[$rand_response];
     // $line_acc_token = getenv('LINE_ACCESS_TOKEN');
