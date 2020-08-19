@@ -37,7 +37,7 @@ foreach ($client->parseEvents() as $event) {
     }else{
         $specId = $event['source']['userId'];
     }
-    
+
 
     switch ($event['type']) {
         case 'message':
@@ -84,78 +84,95 @@ foreach ($client->parseEvents() as $event) {
                             )
                         )
                     ));
-                
+
                 }
                 elseif(substr($message['text'],0,3) === 'BOT'){
                         // for fun laoz
                         $str = trim(substr($message['text'],3,strlen($message['text'])));
-                        if($str == 'เหลา'){
+                        if($str == 'รอหน่อย'){
 
-                             $client->replyMessage(array(
-                        'replyToken' => $event['replyToken'],
-                        'messages' => array(
-                            array(
-                                'type' => 'image',
-                                'originalContentUrl' => 'https://i.imgur.com/wC7aAUs.jpg',
-                                'previewImageUrl' => 'https://i.imgur.com/wC7aAUs.jpg'
-                            )
-                        )
-                    ));
+                            pcntl_signal(SIGALRM, function () {
+                                global $client;
+                                global $event;
+                                // THIS WILL SEND NOTI OR ALERT TO 3rd Party but we just using echo for now
+                                echo 'Received an alarm signal 10 Second !' . PHP_EOL;
+                                  // send Sorry Image
+                            $client->replyMessage(array(
+                                'replyToken' => $event['replyToken'],
+                                'messages' => array(
+                                    array(
+                                        'type' => 'image',
+                                        'originalContentUrl' => 'https://i.imgur.com/qwYLGPw.jpg',
+                                        'previewImageUrl' => 'https://i.imgur.com/qwYLGPw.jpg'
+                                    )
+                                )
+                            ));
+                            exit(0);
+                            }, false);
+
+                            pcntl_alarm( 10 );
+
+                            // HACK Simulate Request 10 sec
+                            while (true) {
+                                pcntl_signal_dispatch();
+                                sleep(1);
+                            }
+
 
                         }
                         // end of for fun laoz
                         // start for fun boss
-                        elseif($str == 'บอส'){
-
-                             $client->replyMessage(array(
-                        'replyToken' => $event['replyToken'],
-                        'messages' => array(
-                            array(
-                                'type' => 'image',
-                                'originalContentUrl' => 'https://i.imgur.com/wsVvmQm.jpg',
-                                'previewImageUrl' => 'https://i.imgur.com/wsVvmQm.jpg'
-                            )
-                        )
-                    ));
-                            
-                        }
-                        // end of for fun boss
-                         // start for fun bank
-                        elseif($str == 'แบงค์'){
-
-                             $client->replyMessage(array(
-                        'replyToken' => $event['replyToken'],
-                        'messages' => array(
-                            array(
-                                'type' => 'image',
-                                'originalContentUrl' => 'https://i.imgur.com/SGZLBHr.jpg',
-                                'previewImageUrl' => 'https://i.imgur.com/SGZLBHr.jpg'
-                            )
-                        )
-                    ));
-                            
-                        }
-                        // end of for fun bank
-                          // start for fun all
-                        elseif($str == 'ออล'){
-
-                             $client->replyMessage(array(
-                        'replyToken' => $event['replyToken'],
-                        'messages' => array(
-                            array(
-                                'type' => 'image',
-                                'originalContentUrl' => 'https://i.imgur.com/R0Aay6V.jpg',
-                                'previewImageUrl' => 'https://i.imgur.com/R0Aay6V.jpg'
-                            )
-                        )
-                    ));
-                            
-                        }
+//                        elseif($str == 'บอส'){
+//
+//                             $client->replyMessage(array(
+//                        'replyToken' => $event['replyToken'],
+//                        'messages' => array(
+//                            array(
+//                                'type' => 'image',
+//                                'originalContentUrl' => 'https://i.imgur.com/wsVvmQm.jpg',
+//                                'previewImageUrl' => 'https://i.imgur.com/wsVvmQm.jpg'
+//                            )
+//                        )
+//                    ));
+//
+//                        }
+//                        // end of for fun boss
+//                         // start for fun bank
+//                        elseif($str == 'แบงค์'){
+//
+//                             $client->replyMessage(array(
+//                        'replyToken' => $event['replyToken'],
+//                        'messages' => array(
+//                            array(
+//                                'type' => 'image',
+//                                'originalContentUrl' => 'https://i.imgur.com/SGZLBHr.jpg',
+//                                'previewImageUrl' => 'https://i.imgur.com/SGZLBHr.jpg'
+//                            )
+//                        )
+//                    ));
+//
+//                        }
+//                        // end of for fun bank
+//                          // start for fun all
+//                        elseif($str == 'ออล'){
+//
+//                             $client->replyMessage(array(
+//                        'replyToken' => $event['replyToken'],
+//                        'messages' => array(
+//                            array(
+//                                'type' => 'image',
+//                                'originalContentUrl' => 'https://i.imgur.com/R0Aay6V.jpg',
+//                                'previewImageUrl' => 'https://i.imgur.com/R0Aay6V.jpg'
+//                            )
+//                        )
+//                    ));
+//
+//                        }
                         // end of for fun all
                         else{
 
-                        
-                    
+
+
                      $output = chatBot($message['text'],$teach);
                      // start for fun meme
                      if(substr($output,0,4) == 'MEME'){
@@ -201,6 +218,11 @@ foreach ($client->parseEvents() as $event) {
     }
 };
 
+function timeout()
+{
+    console.log("i am too far gone");
+}
+
 function Message($message_in,$collection,$collection_item,$specId,$teach){
 
     $sim_api = getenv('SIMSISMI');
@@ -214,7 +236,7 @@ function Message($message_in,$collection,$collection_item,$specId,$teach){
     if($str != ''){
      if(strtoupper($str) === 'WOWTOKEN' || strtoupper($str) === 'WOW TOKEN'){
 
-        
+
         $strn = file_get_contents('https://data.wowtoken.info/wowtoken.json');
         $json = json_decode($strn, true); // decode the JSON into an associative array
         $json_na = $json['update']['NA']['formatted'];
@@ -223,25 +245,25 @@ $o = new ReflectionObject($datetime);
 $current_new = new DateTime($o->getProperty('date')->getValue($datetime));
 date_modify($current_new, "+14 hours");
         $text_result = "< ".$str." >"."\n--------------\n"."ราคาขาย: ".$json_na['buy']."\nต่ำสุด(24hrs): ".$json_na['24min']."\nสูงสุด(24hrs): ".$json_na['24max']."\nอัพเดทล่าสุด: ".$current_new->format('Y-m-d H:i:s');
-       
-       
-//          try  
-// {  
+
+
+//          try
+// {
 //   $strn = @file_get_contents('https://wowtoken.info/snapshot.json');
 //   if($strn==false)
 //   {
-//      throw new Exception('WoW Token ล่มอยู่จ้ากรุณารอสักครู่');  
+//      throw new Exception('WoW Token ล่มอยู่จ้ากรุณารอสักครู่');
 //   }
 //   else{
 //            $json = json_decode($strn, true); // decode the JSON into an associative array
 //         $json_na = $json['NA']['formatted'];
 //         $text_result = "< ".$str." >"."\n--------------\n"."ราคาขาย: ".$json_na['buy']."\nต่ำสุด(24hrs): ".$json_na['24min']."\nสูงสุด(24hrs): ".$json_na['24max']."\nอัพเดทล่าสุด: ".$json_na['updated']." (+12 in Bangkok)";
 //   }
-// }  
-// catch (Exception $e)  
-// {  
-//   $text_result = $e->getMessage();  
-// }  
+// }
+// catch (Exception $e)
+// {
+//   $text_result = $e->getMessage();
+// }
 
                     }
                     // Teach !!
@@ -255,13 +277,13 @@ date_modify($current_new, "+14 hours");
                     //         }
 
                     // $teach->insert(array("user" => $specId, "question" => $str , "answer" => $text_result));
-                            
+
                     //     }
 
                         else{
 
-    $search = strtoupper($str);                    
-    $where = array('name' => array('$regex' => new MongoRegex("/^$search/")));               
+    $search = strtoupper($str);
+    $where = array('name' => array('$regex' => new MongoRegex("/^$search/")));
     // $cursor = $collection_item->findOne(array('name' => strtoupper($str)));
     $cursor = $collection_item->findOne($where);
     if(!empty($cursor)){
@@ -275,7 +297,7 @@ date_modify($current_new, "+14 hours");
         // $text_1 = "< ".$cursor['name']." >"."\n--------------\n"."1.) ราคาถูกที่สุด\nBuyout: ".$gold.'g'.$silver.'s'.$bronze."b\n".'จำนวน: '.$data['quantity']."\nตั้งโดย: ".$data['owner']."\n========\n";
         $text_1 = "< ".$cursor['name']." >"."\n--------------\n"."1.) ราคาถูกที่สุด\nBuyout: ".$gold.'.'.$silver."g\n".'จำนวน: '.$data['quantity']."\nตั้งโดย: ".$data['owner']."\n========\n";
 
-    } 
+    }
         $ah = $collection->find(array('item' => $cursor['item'],'buyout' => array('$gt' => 0)))->sort(array('quantity' => -1,'buyout'=> 1))->limit(1);
 
         foreach($ah as $data){
@@ -289,7 +311,7 @@ date_modify($current_new, "+14 hours");
         $si = substr($data['viable'],-4,2);
         $go = substr($data['viable'],0,($len-4));
         $text_2 = "2.) ถูกที่สุดในปริมาณมากที่สุด"."\nBuyout: ".$gold.'.'.$silver."g\n".'จำนวน: '.$data['quantity']."\nตั้งโดย: ".$data['owner']."\nราคาต่อชิ้น: ".$go.".".$si."g\n========\n";
-    } 
+    }
     $ah = $collection->find(array('item' => $cursor['item'],'buyout' => array('$gt' => 0)))->sort(array('viable' => 1))->limit(1);
 
         foreach($ah as $data){
@@ -303,12 +325,12 @@ date_modify($current_new, "+14 hours");
         $si = substr($data['viable'],-4,2);
         $go = substr($data['viable'],0,($len-4));
         $text_3 = "3.) คุ้มค่าที่สุด(ต่อชิ้น)"."\nBuyout: ".$gold.'.'.$silver."g\n".'จำนวน: '.$data['quantity']."\nตั้งโดย: ".$data['owner']."\nราคาต่อชิ้น: ".$go.".".$si."g\n========\n";
-    } 
-    $text_result = $text_1.$text_2.$text_3; 
+    }
+    $text_result = $text_1.$text_2.$text_3;
     }
         else{
- 
-            
+
+
        $text_result = $str.' นี่มันอะไรไม่รู้จักเฟ้ย ไปพิมพ์มาใหม่ ! แต่ถ้าอยากคุยเล่นใช้ BOT แทน AH นะจ๊ะ';
     // print_r($json['response']);
     }
@@ -344,8 +366,8 @@ $answer_del = trim($split_del[1]); //Answer For Del
 
 if(isset($split[0]) && isset($split[1])){
 // $where = array("question" => $question);
-// $teach->insert(array("user" => $specId, "question" => $question , "answer" => $answer));    
-$where = array('question' => array('$regex' => new MongoRegex("/^$question/")));              
+// $teach->insert(array("user" => $specId, "question" => $question , "answer" => $answer));
+$where = array('question' => array('$regex' => new MongoRegex("/^$question/")));
 // // $teach->update(array("question" => $question),array('$addToSet' => array("answer" => $answer)));
 $cursor = $teach->findOne($where);
 if(!empty($cursor)){
@@ -354,19 +376,19 @@ $teach->update(array("_id" => $id),array('$addToSet' => array("answer" => $answe
 // $id = new MongoId($id);
 }
 else{ // Empty Insert New one
-$teach->insert(array("question" => $question , "answer" => array($answer)));    
+$teach->insert(array("question" => $question , "answer" => array($answer)));
 }
-$text_result = "โอเคฉันจะจำไว้";    
+$text_result = "โอเคฉันจะจำไว้";
 }
 elseif(isset($split_del[0]) && isset($split_del[1])){
 
-$where = array('question' => $question_del);              
+$where = array('question' => $question_del);
 // // $teach->update(array("question" => $question),array('$addToSet' => array("answer" => $answer)));
 $cursor = $teach->findOne($where);
 if(!empty($cursor)){
 $id = $cursor['_id'];
 $teach->update(array("_id" => $id),array('$pull' => array("answer" => $answer_del)));
-$text_result = "ฉันลบคำตอบกระหลั่วๆๆแบบนี้ให้แล้วจ้า";  
+$text_result = "ฉันลบคำตอบกระหลั่วๆๆแบบนี้ให้แล้วจ้า";
 // $id = new MongoId($id);
 }
 }
@@ -383,7 +405,7 @@ return $text_result;
 function chatBot($message_in,$teach){
 
 $sim_api = getenv('SIMSISMI');
-    
+
     //  $response = array('bot','custom','meme');
     $response = array('bot','custom'); // Del MEME
      $rand_response = array_rand($response);
@@ -396,7 +418,7 @@ $sim_api = getenv('SIMSISMI');
 
     $str = trim(substr($message_in,3,strlen($message_in)));
     if($str != ''){
-        
+
         if($response_result == 'bot'){
 
 
@@ -406,26 +428,26 @@ $sim_api = getenv('SIMSISMI');
             $text_result = $res['response'];
              } else{ // Custom Chat call
 
-        $where_question = array('question' => array('$regex' => new MongoRegex("/^$str/i")));   
-        $cursor_question = $teach->findOne($where_question);  
+        $where_question = array('question' => array('$regex' => new MongoRegex("/^$str/i")));
+        $cursor_question = $teach->findOne($where_question);
         if(!empty($cursor_question)){
-        
+
         $answer_list = $cursor_question['answer'];
         $rand_ans = array_rand($answer_list);
-        $text_result = $answer_list[$rand_ans]; 
-        } 
+        $text_result = $answer_list[$rand_ans];
+        }
         else{
-        
+
          $random_message = array("จ้า","คือไยหยอ","พูดอะไรไม่เห็นจะเข้าใจเลย","จะให้โอกาสพูดอีกที","อีตาปลาบนตีนตะกวด","อีกิ้งกือตัดต่อพันธุกรรม","อีลบเข็บของไส้เดือน","ไม่มีปัญญาทำให้ผู้ชายมารัก","เธอๆ ทำยังไงให้อ้วนอ่ะ","ถ้า นีล อาร์มสตอรง เค้าเจอเธอก่อนเค้าคงไม่ต้องไปดวงจันทร์"
         ,"หมูป่าปากีสถาน","อิไม่มีดอก","หน้าหนังฮี๋ สังกะสีบาดแตด","นังมิติลี้ลับ!","ห่ากินหัว","ปอบถั่งมึง","สี่แม่ง","บ่ค่อยฮู้เรื่อง","เรื่องดีๆเธอคงไม่ถนัด แต่ถ้าเรื่องสัตว์สัตว์เธอถนัดดี๊ดี","เธอๆนี่โลกมนุษย์ ผุดลงไปใต้ดินได้แล้วค่ะ","สมองใหญ่เท่านมคงจะดี","หัดใช้ฟังก์ชั่นหลักของตูบ้างสิวะ");
         $rand_keys = array_rand($random_message);
         $text_result = $random_message[$rand_keys];
 
         }
-             
+
              }
 
-            
+
 
         }
         // start of meme
@@ -434,20 +456,20 @@ $sim_api = getenv('SIMSISMI');
             $meme = file_get_contents('http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=meme');
             $result = json_decode($meme,true);
             $text_result = "MEME ".str_replace( 'http://', 'https://', $result['data']['fixed_width_small_url'])." ".str_replace( 'http://', 'https://', $result['data']['image_mp4_url'] );
-            
+
 
         }
         // end of meme
         else{ //custom Chat Call
 
-        $where_question = array('question' => array('$regex' => new MongoRegex("/^$str/i")));   
-        $cursor_question = $teach->findOne($where_question);  
+        $where_question = array('question' => array('$regex' => new MongoRegex("/^$str/i")));
+        $cursor_question = $teach->findOne($where_question);
         if(!empty($cursor_question)){
-        
+
         $answer_list = $cursor_question['answer'];
         $rand_ans = array_rand($answer_list);
-        $text_result = $answer_list[$rand_ans]; 
-        } 
+        $text_result = $answer_list[$rand_ans];
+        }
         else{
              $simisimi = file_get_contents('http://api.simsimi.com/request.p?key='.$sim_api.'&lc=th&ft=1.0&text='.urlencode($str));
             $res = json_decode($simisimi, true); // decode the JSON into an associative array
@@ -459,8 +481,8 @@ $sim_api = getenv('SIMSISMI');
         ,"หมูป่าปากีสถาน","อิไม่มีดอก","หน้าหนังฮี๋ สังกะสีบาดแตด","นังมิติลี้ลับ!","ห่ากินหัว","ปอบถั่งมึง","สี่แม่ง","บ่ค่อยฮู้เรื่อง","เรื่องดีๆเธอคงไม่ถนัด แต่ถ้าเรื่องสัตว์สัตว์เธอถนัดดี๊ดี","เธอๆนี่โลกมนุษย์ ผุดลงไปใต้ดินได้แล้วค่ะ","สมองใหญ่เท่านมคงจะดี","หัดใช้ฟังก์ชั่นหลักของตูบ้างสิวะ");
         $rand_keys = array_rand($random_message);
         $text_result = $random_message[$rand_keys];
-             
-             
+
+
              }
 
         }
@@ -471,7 +493,7 @@ $sim_api = getenv('SIMSISMI');
 
 
 
-        } //Endof String != '' 
+        } //Endof String != ''
 
     else{
     $text_result = "มีไรว่ามา";
@@ -490,7 +512,7 @@ function LoveScore($message_in){
     $opts = array(
   'http'=>array(
     'method'=>"GET",
-    'header'=>"X-Mashape-Key: 3AXm18xK3DmshYflu1c7Icp5tMfnp1LoMu3jsnmgcMGN9AbvN5" 
+    'header'=>"X-Mashape-Key: 3AXm18xK3DmshYflu1c7Icp5tMfnp1LoMu3jsnmgcMGN9AbvN5"
   )
 );
 
