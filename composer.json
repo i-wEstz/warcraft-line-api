@@ -1,13 +1,15 @@
 {
   "require" : {
-    "ext-pcntl": "*",
-    "ext-gd": "*",
+    "php": "7.4.9",
     "silex/silex": "^1.3",
     "monolog/monolog": "^1.4",
     "twig/twig": "^1.8",
+    "mongodb/mongodb": "1.7.0",
     "symfony/twig-bridge": "^2",
-    "ext-mongo": "*",
-    "jenssegers/mongodb": "^3.6"
+    "ext-mongo": "^1.8",
+    "jenssegers/mongodb": "^3.6",
+    "ext-pcntl": "*",
+    "ext-gd": "*"
   },
   "require-dev": {
     "heroku/heroku-buildpack-php": "*"
