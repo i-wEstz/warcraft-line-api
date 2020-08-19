@@ -6,7 +6,7 @@
     "twig/twig": "^1.8",
     "mongodb/mongodb": "^1.7",
     "symfony/twig-bridge": "^2",
-    "ext-mongo": "^1.8",
+    "ext-mongodb": "*",
     "jenssegers/mongodb": "^3.6",
     "ext-pcntl": "*",
     "ext-gd": "*"
