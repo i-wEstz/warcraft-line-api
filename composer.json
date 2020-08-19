@@ -1,12 +1,11 @@
 {
   "require" : {
-    "php": "7.4.9",
     "silex/silex": "^1.3",
     "monolog/monolog": "^1.4",
     "twig/twig": "^1.8",
-    "mongodb/mongodb": "^1.7",
     "symfony/twig-bridge": "^2",
-    "ext-mongodb": "*",
+    "ext-mongo": "*",
+    "jenssegers/mongodb": "^3.2",
     "ext-pcntl": "*",
     "ext-gd": "*"
   },
