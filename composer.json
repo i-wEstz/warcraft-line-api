@@ -6,7 +6,8 @@
     "symfony/twig-bridge": "^2",
     "ext-mongo": "*",
     "jenssegers/mongodb": "^3.2",
-    "ext-pcntl": "*"
+    "ext-pcntl": "*",
+    "ext-gd": "*"
   },
   "require-dev": {
     "heroku/heroku-buildpack-php": "*"
