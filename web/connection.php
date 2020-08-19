@@ -1,7 +1,7 @@
 <?php
 try
 {
-    require 'vendor/autoload.php'; // include Composer's autoloader
+    require '../vendor/autoload.php'; // include Composer's autoloader
 //    $connection = new Mongo('mongodb://iwestz:lakious1@ds145389.mlab.com:45389/wow-api-ah');
 //    $connection = new MongoClient('mongodb://iwestz:lakious1@ds145389.mlab.com:45389/wow-api-ah');
 //    $connection = new Mongodb('mongodb://iwestz:lakious1@ds145389.mlab.com:45389/wow-api-ah');
