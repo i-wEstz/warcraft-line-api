@@ -5,7 +5,8 @@ try
 //    $connection = new Mongo('mongodb://iwestz:lakious1@ds145389.mlab.com:45389/wow-api-ah');
 //    $connection = new MongoClient('mongodb://iwestz:lakious1@ds145389.mlab.com:45389/wow-api-ah');
 //    $connection = new Mongodb('mongodb://iwestz:lakious1@ds145389.mlab.com:45389/wow-api-ah');
-    $connection = new MongoDB('mongodb://iwestz:lakious1@ds145389.mlab.com:45389/wow-api-ah');
+    $connection = new MongoClient('mongodb://iwestz:lakious1@ds145389.mlab.com:45389/wow-api-ah');
+//    $connection = new MongoDB($m);
 //    $connection = new MongoDB('mongodb://iwestz:lakious1@ds145389.mlab.com:45389/wow-api-ah');
 
     $database   = $connection->selectDB('wow-api-ah');
