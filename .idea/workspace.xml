@@ -85,7 +85,7 @@
       <workItem from="1597816867713" duration="7993000" />
       <workItem from="1597831961130" duration="1360000" />
       <workItem from="1597834373824" duration="81000" />
-      <workItem from="1597834459899" duration="7034000" />
+      <workItem from="1597834459899" duration="7594000" />
     </task>
     <task id="LOCAL-00001" summary="change requirement for DOSCG">
       <created>1597831227533</created>
@@ -241,7 +241,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597842870574</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="change requirement for DOSCG">
+      <created>1597843078881</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1597843078881</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -292,18 +299,18 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="308" y="156" key="#CLI_Interpreters/0.0.1440.900@0.0.1440.900" timestamp="1597834412912" />
-    <state x="306" y="44" key="CommitChangelistDialog2" timestamp="1597842870410">
+    <state x="306" y="44" key="CommitChangelistDialog2" timestamp="1597843078735">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="306" y="44" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1597842870410" />
+    <state x="306" y="44" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1597843078735" />
     <state x="474" y="369" width="491" height="249" key="ComposerInitDialogKey" timestamp="1597836048719">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="474" y="369" width="491" height="249" key="ComposerInitDialogKey/0.0.1440.900@0.0.1440.900" timestamp="1597836048719" />
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1597842877127">
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1597843469184">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1597842877127" />
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1597843469184" />
     <state x="100" y="100" width="1240" height="700" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1597842052134">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -312,10 +319,10 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="418" y="205" width="771" height="490" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1597841570016" />
-    <state x="519" y="346" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1597832171863">
+    <state x="519" y="346" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1597843255126">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="519" y="346" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1440.900@0.0.1440.900" timestamp="1597832171863" />
+    <state x="519" y="346" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1440.900@0.0.1440.900" timestamp="1597843255126" />
     <state x="468" y="351" key="git4idea.ui.GitResetDialog" timestamp="1597832014093">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
